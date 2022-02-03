@@ -8,7 +8,7 @@ import { connectors } from './connectors/connectors';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider autoConnect>
+    <Provider autoConnect connectors={connectors}>
       <App />
     </Provider>
   </React.StrictMode>,

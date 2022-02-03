@@ -11,27 +11,13 @@ const infuraId = process.env.INFURA_ID
 const chains = defaultChains
 
 // Set up connectors
-export const connectors = ({ 
-  chainId 
-}:{
-  chainId: any
-}) => {
-  const rpcUrl =
-    chains.find((x) => x.id === chainId)?.rpcUrls?.[0] ??
-    chain.mainnet.rpcUrls[0]
+export const connectors = () => {
+  // const rpcUrl =
+  //   chains.find((x) => x.id === chainId)?.rpcUrls?.[0] ??
+  //   chain.mainnet.rpcUrls[0]
   return [
-    new InjectedConnector({ chains }),
-    new WalletConnectConnector({
-      options: {
-        infuraId,
-        qrcode: true,
-      },
-    }),
-    new WalletLinkConnector({
-      options: {
-        appName: 'My wagmi app',
-        jsonRpcUrl: `${rpcUrl}/${infuraId}`,
-      },
+    new InjectedConnector({
+      chains,
     }),
   ]
 }
