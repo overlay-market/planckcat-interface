@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'wagmi';
+import store from './state/state';
+import { Provider as Web3Provider } from 'wagmi';
 import { connectors } from './connectors/connectors';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider autoConnect connectors={connectors}>
-      <App />
+    <Provider store={store}>
+      <Web3Provider autoConnect connectors={connectors}>
+        <App />
+      </Web3Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

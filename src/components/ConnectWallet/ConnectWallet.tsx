@@ -1,10 +1,13 @@
-import { useAccount, useConnect } from 'wagmi'
+import { useAccount, useConnect } from 'wagmi';
+import { useWalletModalToggle } from '../../state/application/hooks';
 
 export const ConnectWallet = () => {
   const [{ data: connectData, error: connectError }, connect] = useConnect();
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
   });
+
+  const toggleWalletModal = useWalletModalToggle();
 
   if (accountData) {
     return (
@@ -23,6 +26,9 @@ export const ConnectWallet = () => {
 
   return (
     <div>
+      <button onClick={toggleWalletModal}>
+        Connect Wallet
+      </button>
       {connectData.connectors.map((x) => (
         <button disabled={!x.ready} key={x.id} onClick={() => connect(x)}>
           {x.name}
