@@ -4,7 +4,6 @@ import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet';
 import { Header } from '../components/Header/Header';
 
 const Wrapper = styled.div`
-  background: rgb(11, 15, 28);
   height: 100%;
 `
 
@@ -17,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
