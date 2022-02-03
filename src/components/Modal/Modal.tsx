@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import { theme } from '../../theme/theme';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { animated, useTransition, useSpring } from 'react-spring';
 import { isMobile } from 'react-device-detect';
