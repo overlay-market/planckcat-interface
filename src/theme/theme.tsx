@@ -6,6 +6,7 @@ import styled, {
   ThemeProvider as StyledComponentsThemeProvider
 } from 'styled-components';
 import { Colors } from "./styled";
+import { useIsDarkMode } from '../state/user/hooks';
 
 export const MEDIA_WIDTHS = {
   minExtraSmall: 576,

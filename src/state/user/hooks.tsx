@@ -1,5 +1,7 @@
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { useCallback } from 'react';
+import { shallowEqual } from 'react-redux';
 import { updateUserDarkMode } from "./actions";
+import { useAppSelector, useAppDispatch } from "../hooks";
 
 export function useIsDarkMode(): boolean {
   const { userDarkMode, matchesDarkMode } = useAppSelector(
