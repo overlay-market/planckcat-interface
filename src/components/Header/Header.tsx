@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ConnectWalletModal from "../ConnectWallet/ConnectWalletModal";
+import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { TEXT } from "../../theme/theme";
 
 const Container = styled.div`
@@ -12,18 +13,23 @@ const FlexRowContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  padding: 16px 32px;
+  max-width: 1000px;
+  margin: auto;
 `
 
 export const Header = () => {
   return (
     <Container>
       <FlexRowContainer>
-        <TEXT.StandardBody>
+        <TEXT.StandardBody m={'auto 0'}>
           PlanckCatDAO
         </TEXT.StandardBody>
-        <ConnectWalletModal />
+
+        <ConnectWallet />
       </FlexRowContainer>
+
+      <ConnectWalletModal />
     </Container>
   )
 };
