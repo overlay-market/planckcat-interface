@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import ThreeDots from 'react-loader-spinner';
 import { useAccount, useConnect } from 'wagmi';
-import { useWalletModalToggle } from '../../state/application/hooks';
+import { useWalletModalToggle, useModalOpen } from '../../state/application/hooks';
+import { ApplicationModal } from '../../state/application/actions';
 
 const ConnectWalletButton = styled.button`
   background: transparent;
@@ -17,6 +19,8 @@ export const ConnectWallet = () => {
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
   });
+
+  const walletModalOpen = useModalOpen(ApplicationModal.WALLET);
 
   const toggleWalletModal = useWalletModalToggle();
 
@@ -37,9 +41,16 @@ export const ConnectWallet = () => {
 
   return (
     <div>
-      <ConnectWalletButton onClick={toggleWalletModal}>
-        Connect Wallet
-      </ConnectWalletButton>
+      {walletModalOpen ? (
+        <ConnectWalletButton>
+          ...loading
+        </ConnectWalletButton>
+      ):(
+        <ConnectWalletButton onClick={toggleWalletModal}>
+          Connect Wallet
+        </ConnectWalletButton>
+      )}
+
       {/* {connectData.connectors.map((x) => (
         <button disabled={!x.ready} key={x.id} onClick={() => connect(x)}>
           {x.name}
