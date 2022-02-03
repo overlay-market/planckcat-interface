@@ -20,6 +20,12 @@ const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
 
     background-color: rgba(0, 0, 0, 0.424);
     backdrop-filter: blur(7px);
+
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
   }
 `
 
