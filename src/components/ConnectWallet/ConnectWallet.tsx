@@ -14,6 +14,7 @@ const ConnectWalletButton = styled.button`
   color: #f2f2f2;
   padding: 12px;
   font-size: 12px;
+  cursor: pointer;
 `;
 
 const Web3WalletDisplay = styled.div`
