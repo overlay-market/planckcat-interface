@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { useModalOpen, useWalletModalToggle } from "../../state/application/hooks";
 import { ApplicationModal } from "../../state/application/actions";
 import { TEXT } from "../../theme/theme";
-import { useConnect } from "wagmi";
+import { useConnect, useAccount } from "wagmi";
 import Modal from "../Modal/Modal";
 import MetaMaskLogo from "../../assets/metamask-icon.png";
 
@@ -55,12 +55,19 @@ const WALLET_VIEWS = {
 
 export default function ConnectWalletModal() {
   const [{ data: connectData, error: connectError }, connect] = useConnect();
+  const [{ data: accountData }, disconnect] = useAccount({ fetchEns: true });
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET);
 
   const toggleWalletModal = useWalletModalToggle();
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT);
+
+  useEffect(() => {
+    if (accountData && walletModalOpen) {
+      toggleWalletModal()
+    }
+  }, [walletModalOpen, accountData, toggleWalletModal])
 
   return (
     <Modal isOpen={walletModalOpen} onDismiss={toggleWalletModal} minHeight={false} maxHeight={90}>
