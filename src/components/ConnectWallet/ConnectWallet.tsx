@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ThreeDots from 'react-loader-spinner';
 import { useAccount, useConnect } from 'wagmi';
+import { shortenAddress } from '../../utils/web3';
 import { useWalletModalToggle, useModalOpen } from '../../state/application/hooks';
 import { ApplicationModal } from '../../state/application/actions';
 
@@ -11,7 +12,8 @@ const ConnectWalletButton = styled.button`
   border: 1px solid #56CCF2;
   border-radius: 8px;
   color: #f2f2f2;
-  padding: 16px 12px;
+  padding: 12px;
+  font-size: 12px;
 `;
 
 const Web3WalletDisplay = styled.div`
@@ -21,6 +23,8 @@ const Web3WalletDisplay = styled.div`
   border: none;
   border-radius: 8px;
   box-shadow: none;
+  font-size: 12px;
+  padding: 12px;
 `
 
 
@@ -47,7 +51,7 @@ export const ConnectWallet = () => {
       //   <button onClick={disconnect}>Disconnect</button>
       // </div>
       <Web3WalletDisplay>
-        {accountData?.address}
+        {shortenAddress(accountData.address)}
       </Web3WalletDisplay>
     )
   }
