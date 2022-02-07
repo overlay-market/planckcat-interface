@@ -14,6 +14,16 @@ const ConnectWalletButton = styled.button`
   padding: 16px 12px;
 `;
 
+const Web3WalletDisplay = styled.div`
+  background: #56CCF2;
+  font-family: 'Press Start 2P';
+  color: #f2f2f2;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+`
+
+
 export const ConnectWallet = () => {
   const [{ data: connectData, error: connectError }, connect] = useConnect();
   const [{ data: accountData }, disconnect] = useAccount({
@@ -26,16 +36,19 @@ export const ConnectWallet = () => {
 
   if (accountData) {
     return (
-      <div>
-        <img src={accountData?.ens?.avatar ?? undefined} alt="ENS Avatar" />
-        <div>
-          {accountData.ens?.name
-            ? `${accountData.ens?.name} (${accountData.address})`
-            : accountData.address}
-        </div>
-        <div>Connected to {accountData?.connector?.name}</div>
-        <button onClick={disconnect}>Disconnect</button>
-      </div>
+      // <div>
+      //   <img src={accountData?.ens?.avatar ?? undefined} alt="ENS Avatar" />
+      //   <div>
+      //     {accountData.ens?.name
+      //       ? `${accountData.ens?.name} (${accountData.address})`
+      //       : accountData.address}
+      //   </div>
+      //   <div>Connected to {accountData?.connector?.name}</div>
+      //   <button onClick={disconnect}>Disconnect</button>
+      // </div>
+      <Web3WalletDisplay>
+        {accountData?.address}
+      </Web3WalletDisplay>
     )
   }
 
