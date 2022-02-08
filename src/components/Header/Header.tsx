@@ -13,7 +13,7 @@ const FlexRowContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 32px;
+  padding: 48px;
   max-width: 1000px;
   margin: auto;
 `
