@@ -6,6 +6,8 @@ import { TEXT } from './theme/theme';
 import { useAccount, useConnect } from 'wagmi';
 import PlanckCat from './assets/planck-cat.png';
 import { ShellTerminal } from './components/ShellTerminal/ShellTerminal';
+import Web3ReactManager from './components/Web3ReactManager/Web3ReactManager';
+
 
 export const AppWrapper = styled.div`
   background-color: ${({theme}) => theme.bg1};
@@ -37,6 +39,7 @@ function App() {
   return (
     <AppWrapper>
       <Header />
+      <Web3ReactManager>
       <Body>
         { accountData ? (
           <TEXT.StandardBody m={'auto'}>
@@ -52,6 +55,7 @@ function App() {
           </>
         )}
       </Body>
+      </Web3ReactManager>
     </AppWrapper>
   );
 }

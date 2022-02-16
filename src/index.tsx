@@ -5,18 +5,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './state/state';
-import { Provider as Web3Provider } from 'wagmi';
 import ThemeProvider from './theme/theme';
-import { connectors } from './connectors/connectors';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Web3Provider autoConnect connectors={connectors}>
         <ThemeProvider>
           <App />
         </ThemeProvider>
-      </Web3Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
