@@ -35,16 +35,16 @@ function App() {
   const [{ data: accountData }] = useAccount();
   const [{ data: networkData }] = useNetwork();
   const tokens = useWalletTokens(accountData?.address)
-  // const [{ data, error, loading }, read] = useContractRead(
-  //   {
-  //     addressOrName: '0x60a2152a048CB2DAFd44F4760364c1BEdf7eb8C5',
-  //     contractInterface: PlanckCat_ABI,
-  //   },
-  //   'balanceOf',
-  //   {
-  //     args: '0x22c17332f5527703d34121704c036d713418c232'
-  //   }
-  // )
+  const [{ data: contractData }, read] = useContractRead(
+    {
+      addressOrName: '0x2A2e181Cc177974c5D013240C34E1dEf1A3CC31a',
+      contractInterface: PlanckCat_ABI,
+    },
+    'canClaim',
+    {
+      args: '0x22c17332f5527703d34121704c036d713418c232'
+    }
+  )
 
   console.log('networkData ', networkData);
   console.log('tokens: ', tokens);
@@ -55,13 +55,16 @@ function App() {
       <Body>
         { accountData ? (
           <TEXT.StandardBody m={'auto'}>
-            This wallet does not currently hold a PlanckCat.
+            hello
           </TEXT.StandardBody>
         ):(
           <>
             {/* <ImgWrapper>
               <img src={PlanckCat} />
             </ImgWrapper> */}
+            <TEXT.StandardBody m={'auto'}>
+              This wallet does not currently hold a PlanckCat.
+            </TEXT.StandardBody>
             
             <ShellTerminal />
           </>
