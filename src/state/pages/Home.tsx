@@ -23,22 +23,7 @@ export function Home(){
 
   return (
     <Container>
-      { accountData ? (
-        <TEXT.StandardBody m={'auto'}>
-          hello
-        </TEXT.StandardBody>
-      ):(
-        <>
-          {/* <ImgWrapper>
-            <img src={PlanckCat} />
-          </ImgWrapper> */}
-          <TEXT.StandardBody m={'auto'}>
-            This wallet does not currently hold a PlanckCat.
-          </TEXT.StandardBody>
-          
-          <ShellTerminal />
-        </>
-      )}
+      <ShellTerminal />
     </Container>
   )
 }

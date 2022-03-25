@@ -19,17 +19,26 @@ const FlexRowContainer = styled.div`
   margin: auto;
 `
 
+const NavigationLink = styled(StyledInternalLink)`
+  margin-top: auto;
+  margin-bottom: auto;
+`
+
 export const Header = () => {
   return (
     <Container>
       <FlexRowContainer>
-        <TEXT.StandardBody m={'auto 0'}>
+        <NavigationLink to={'/'} noEffect={true}>
           PlanckCatDAO
-        </TEXT.StandardBody>
+        </NavigationLink>
 
-        <StyledInternalLink to={'/Claim'}>
+        <NavigationLink to={'/Claim'}>
           Claim
-        </StyledInternalLink>
+        </NavigationLink>
+
+        <NavigationLink to={'/Claim'}>
+          Inventory
+        </NavigationLink>
         <ConnectWallet />
       </FlexRowContainer>
 

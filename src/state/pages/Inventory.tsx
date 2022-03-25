@@ -9,11 +9,11 @@ const Container = styled.div`
   flex: 1;
 `;
 
-export function Claim() {
+export function Inventory() {
   return (
     <Container>
       <TEXT.StandardBody m={'auto'}>
-        Claim Page
+        Inventory Page
       </TEXT.StandardBody>
     </Container>
   )
