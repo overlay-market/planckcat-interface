@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { ConnectWallet } from './components/ConnectWallet/ConnectWallet';
 import { Header } from './components/Header/Header';
 import { TEXT } from './theme/theme';
-import { useAccount, useConnect, useContract, useContractRead } from 'wagmi';
+import { useAccount, useConnect, useContract, useContractRead, useNetwork } from 'wagmi';
 import PlanckCat from './assets/planck-cat.png';
 import { ShellTerminal } from './components/ShellTerminal/ShellTerminal';
+import { useWalletTokens } from './state/wallet/hooks';
 import PlanckCat_ABI from './constants/abis/PlanckCat.json';
 
 export const AppWrapper = styled.div`
@@ -32,21 +33,21 @@ const ImgWrapper = styled.div`
 
 function App() {
   const [{ data: accountData }] = useAccount();
+  const [{ data: networkData }] = useNetwork();
+  const tokens = useWalletTokens(accountData?.address)
+  // const [{ data, error, loading }, read] = useContractRead(
+  //   {
+  //     addressOrName: '0x60a2152a048CB2DAFd44F4760364c1BEdf7eb8C5',
+  //     contractInterface: PlanckCat_ABI,
+  //   },
+  //   'balanceOf',
+  //   {
+  //     args: '0x22c17332f5527703d34121704c036d713418c232'
+  //   }
+  // )
 
-  const [{ data, error, loading }, read] = useContractRead(
-    {
-      addressOrName: '0x60a2152a048CB2DAFd44F4760364c1BEdf7eb8C5',
-      contractInterface: PlanckCat_ABI,
-    },
-    'balanceOf',
-    {
-      args: '0x089A180a1fDf7bEF50D1BA45b5456E14f6E44255'
-    }
-  )
-
-  console.log('data: ', data);
-  console.log('error: ', error);
-  console.log('loading: ', loading);
+  console.log('networkData ', networkData);
+  console.log('tokens: ', tokens);
 
   return (
     <AppWrapper>
