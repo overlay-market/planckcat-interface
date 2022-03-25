@@ -9,7 +9,7 @@ const ConnectWalletButton = styled.button`
   background: transparent;
   box-shadow: none;
   font-family: 'Press Start 2P';
-  border: 1px solid #56CCF2;
+  border: 2px solid #56CCF2;
   border-radius: 8px;
   color: #f2f2f2;
   padding: 12px;

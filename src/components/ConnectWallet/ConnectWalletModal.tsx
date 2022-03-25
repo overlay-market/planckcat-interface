@@ -16,7 +16,7 @@ const IconWrapper = styled.div`
 const ProviderSelectionButton = styled.button`
   display: flex;
   background: transparent; 
-  border: 1px solid #56CCF2;
+  border: 2px solid #56CCF2;
   border-radius: 8px;
   color: #f2f2f2;
   font-size: 12px;
@@ -25,6 +25,7 @@ const ProviderSelectionButton = styled.button`
   width: 100%;
   font-family: 'Press Start 2P';
   margin-top: 12px;
+  box-shadow: 0 0 5px #56ccf2;
 
   ${({ theme }) => theme.mediaWidth.minSmall`
     :hover, :active {
