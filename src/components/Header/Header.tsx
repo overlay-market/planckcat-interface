@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ConnectWalletModal from "../ConnectWallet/ConnectWalletModal";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { TEXT } from "../../theme/theme";
+import { StyledInternalLink } from "../../theme/components";
 
 const Container = styled.div`
   display: block;
@@ -26,6 +27,9 @@ export const Header = () => {
           PlanckCatDAO
         </TEXT.StandardBody>
 
+        <StyledInternalLink to={'/Claim'}>
+          Claim
+        </StyledInternalLink>
         <ConnectWallet />
       </FlexRowContainer>
 

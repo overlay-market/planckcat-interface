@@ -10,27 +10,13 @@ import { ShellTerminal } from './components/ShellTerminal/ShellTerminal';
 import { useWalletTokens } from './state/wallet/hooks';
 import PlanckCatMinter_ABI from './constants/abis/PlanckCat.json';
 import { Claim } from './state/pages/Claim';
+import { Home } from './state/pages/Home';
 
 export const AppWrapper = styled.div`
   background-color: ${({theme}) => theme.bg1};
   height: 100%;
   min-height: 100vh;
   width: 100vw;
-`;
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  margin: 50px auto auto auto;
-  flex: 1;
-`;
-
-const ImgWrapper = styled.div`
-  display: flex;
-  margin: auto;
-  height: 200px;
-  width: 200px;
 `;
 
 function App() {
@@ -55,25 +41,8 @@ function App() {
   return (
     <AppWrapper>
       <Header />
-      <Body>
-        { accountData ? (
-          <TEXT.StandardBody m={'auto'}>
-            hello
-          </TEXT.StandardBody>
-        ):(
-          <>
-            {/* <ImgWrapper>
-              <img src={PlanckCat} />
-            </ImgWrapper> */}
-            <TEXT.StandardBody m={'auto'}>
-              This wallet does not currently hold a PlanckCat.
-            </TEXT.StandardBody>
-            
-            <ShellTerminal />
-          </>
-        )}
-      </Body>
       <Switch>
+        <Route exact strict path="/" component={Home} />
         <Route exact strict path="/claim" component={Claim} />
       </Switch>
     </AppWrapper>
