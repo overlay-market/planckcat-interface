@@ -3,62 +3,23 @@ import "./ShellTerminal.css";
 import PlanckCat from "../../assets/planck-cat.png"
 // @ts-nocheck
 
-const Tab = styled.div`
-  background-color: black;
-  width: 77px;
-  padding: .5rem;
-  display: flex;
-  gap: 1rem;
-  border-radius: 8px 8px 0 0;
-`;
-
-const Line = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 8px 0;
-`
-
-const Command = styled.div`
-  color: yellow;
-`
-
-const ImgWrapper = styled.div`
-  display: flex;
-  margin: auto;
-  height: 200px;
-  width: 200px;
-`;
-
 export const ShellTerminal = () => {
   return (
-    <main>
-      <div id="tabs">
-        <Tab>Shell</Tab>
-      </div>
-      <Line>
-        SH C:\win32{'>'} ...loading
-      </Line>
-
-      <Line>
-        SH C:\win32{'>'} curl planckcat.lol -v
-      </Line>
-
-      <Command>
-        VERBOSE: GET http://planckcats.lol with 0-byte payload
-        VERBOSE: received -1-byte response of content type text/html; charset=utf-8
-      </Command>
-
-      <Line>
-        SH C:\win32{'>'} Welcome to PlanckCat.lol
-      </Line>
-
-      <ImgWrapper>
-        <img src={PlanckCat} />
-      </ImgWrapper>
-
-      <Line>
-        SH C:\win32{'>'} <span id="blink">_</span>
-      </Line>
-    </main>
+    <div className="shell-wrap">
+      <p className="shell-top-bar">/Users/PCD/Documents/interface/</p>
+      <ul className="shell-body">
+        <li>cd&nbsp;/Users/PCD/Documents/interface/pages/home/</li>
+        <li>...initializing</li>
+        <li>loaded in 4.2069 seconds.</li>
+        <li>Status Check:</li>
+        <li>- v1-core complete</li>
+        <li>- smart contract audits in progress [50%]</li>
+        <li>- launch imminent</li>
+        <li>{'>>'}</li>
+        <li>{'>>'}</li>
+        <li>{'>>'}</li>
+        <li>Welcome to PlanckCats.lol</li>
+      </ul>
+    </div>
   );
 };

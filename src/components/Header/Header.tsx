@@ -36,7 +36,7 @@ export const Header = () => {
           Claim
         </NavigationLink>
 
-        <NavigationLink to={'/Claim'}>
+        <NavigationLink to={'/Inventory'}>
           Inventory
         </NavigationLink>
         <ConnectWallet />
