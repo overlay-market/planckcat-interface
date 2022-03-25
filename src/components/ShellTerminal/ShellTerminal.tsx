@@ -44,7 +44,7 @@ export const ShellTerminal = () => {
       </Line>
 
       <Command>
-        VERBOSE: GET http://codepen.io/ with 0-byte payload
+        VERBOSE: GET http://planckcats.lol with 0-byte payload
         VERBOSE: received -1-byte response of content type text/html; charset=utf-8
       </Command>
 

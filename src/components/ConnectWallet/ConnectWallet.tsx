@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ThreeDots from 'react-loader-spinner';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount, useConnect, useNetwork } from 'wagmi';
 import { shortenAddress } from '../../utils/web3';
 import { useWalletModalToggle, useModalOpen } from '../../state/application/hooks';
 import { ApplicationModal } from '../../state/application/actions';
@@ -26,14 +26,14 @@ const Web3WalletDisplay = styled.div`
   box-shadow: none;
   font-size: 12px;
   padding: 12px;
-`
-
+`;
 
 export const ConnectWallet = () => {
   const [{ data: connectData, error: connectError }, connect] = useConnect();
-  const [{ data: accountData }, disconnect] = useAccount({
-    fetchEns: true,
-  });
+
+  const [{ data: networkData, error: networkError }, switchNetwork] = useNetwork();
+
+  const [{ data: accountData }, disconnect] = useAccount({ fetchEns: true });
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET);
 
@@ -41,19 +41,12 @@ export const ConnectWallet = () => {
 
   if (accountData) {
     return (
-      // <div>
-      //   <img src={accountData?.ens?.avatar ?? undefined} alt="ENS Avatar" />
-      //   <div>
-      //     {accountData.ens?.name
-      //       ? `${accountData.ens?.name} (${accountData.address})`
-      //       : accountData.address}
-      //   </div>
-      //   <div>Connected to {accountData?.connector?.name}</div>
-      //   <button onClick={disconnect}>Disconnect</button>
-      // </div>
-      <Web3WalletDisplay>
-        {shortenAddress(accountData.address)}
-      </Web3WalletDisplay>
+      <>
+        <Web3WalletDisplay>
+          [{networkData.chain?.name}]
+          {shortenAddress(accountData.address)}
+        </Web3WalletDisplay>
+      </>
     )
   }
 
