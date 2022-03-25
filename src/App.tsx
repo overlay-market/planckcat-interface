@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectWallet } from './components/ConnectWallet/ConnectWallet';
 import { Header } from './components/Header/Header';
 import { TEXT } from './theme/theme';
@@ -8,6 +9,7 @@ import PlanckCat from './assets/planck-cat.png';
 import { ShellTerminal } from './components/ShellTerminal/ShellTerminal';
 import { useWalletTokens } from './state/wallet/hooks';
 import PlanckCatMinter_ABI from './constants/abis/PlanckCat.json';
+import { Claim } from './state/pages/Claim';
 
 export const AppWrapper = styled.div`
   background-color: ${({theme}) => theme.bg1};
@@ -71,6 +73,9 @@ function App() {
           </>
         )}
       </Body>
+      <Switch>
+        <Route exact strict path="/claim" component={Claim} />
+      </Switch>
     </AppWrapper>
   );
 }
