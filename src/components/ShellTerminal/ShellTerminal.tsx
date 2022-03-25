@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import "./ShellTerminal.css";
 import PlanckCat from "../../assets/planck-cat.png"
+import { useAccount, useNetwork } from "wagmi";
 // @ts-nocheck
 
 export const ShellTerminal = () => {
+  const [{ data: accountData }] = useAccount();
+  const [{ data: networkData }] = useNetwork();
+
+  console.log('networkData: ', networkData);
+
   return (
     <div className="shell-wrap">
       <p className="shell-top-bar">/Users/PCD/Documents/interface/</p>
@@ -18,7 +24,15 @@ export const ShellTerminal = () => {
         <li>{'>>'}</li>
         <li>{'>>'}</li>
         <li>{'>>'}</li>
-        <li>Welcome to PlanckCats.lol</li>
+
+        { accountData && networkData ? (
+          <>
+            <li>Welcome user {accountData.address} </li>
+            <li>Connected Network: {networkData?.chain?.name}</li>
+          </>
+        ):(
+          <li>Welcome Anonymous User! Please connect wallet.</li>
+        )}
       </ul>
     </div>
   );
