@@ -43,7 +43,7 @@ export const ConnectWallet = () => {
     return (
       <>
         <Web3WalletDisplay>
-          [{networkData.chain?.name}]
+          {/* [{networkData.chain?.name}] */}
           {shortenAddress(accountData.address)}
         </Web3WalletDisplay>
       </>

@@ -24,6 +24,10 @@ const NavigationLink = styled(StyledInternalLink)`
   margin-bottom: auto;
 `
 
+const MenuLink = styled(NavigationLink)`
+  font-size: 12px;
+`
+
 export const Header = () => {
   return (
     <Container>
@@ -32,13 +36,13 @@ export const Header = () => {
           PlanckCatDAO
         </NavigationLink>
 
-        <NavigationLink to={'/Claim'}>
+        <MenuLink to={'/Claim'}>
           Claim
-        </NavigationLink>
+        </MenuLink>
 
-        <NavigationLink to={'/Inventory'}>
+        <MenuLink to={'/Inventory'}>
           Inventory
-        </NavigationLink>
+        </MenuLink>
         <ConnectWallet />
       </FlexRowContainer>
 
