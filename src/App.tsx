@@ -7,7 +7,7 @@ import { useAccount, useConnect, useContract, useContractRead, useNetwork } from
 import PlanckCat from './assets/planck-cat.png';
 import { ShellTerminal } from './components/ShellTerminal/ShellTerminal';
 import { useWalletTokens } from './state/wallet/hooks';
-import PlanckCat_ABI from './constants/abis/PlanckCat.json';
+import PlanckCatMinter_ABI from './constants/abis/PlanckCat.json';
 
 export const AppWrapper = styled.div`
   background-color: ${({theme}) => theme.bg1};
@@ -38,14 +38,15 @@ function App() {
   const [{ data: contractData }, read] = useContractRead(
     {
       addressOrName: '0x2A2e181Cc177974c5D013240C34E1dEf1A3CC31a',
-      contractInterface: PlanckCat_ABI,
+      contractInterface: PlanckCatMinter_ABI,
     },
     'canClaim',
     {
       args: '0x22c17332f5527703d34121704c036d713418c232'
     }
   )
-
+  
+  console.log('contractData:' , contractData);
   console.log('networkData ', networkData);
   console.log('tokens: ', tokens);
 
