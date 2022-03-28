@@ -13,12 +13,14 @@ const Container = styled.div`
   flex: 1;
 `;
 
-const TokenCard = styled.div`
+const TokenCard = styled.div<{backgroundImg?: string}>`
   height: 200px;
   width: 200px;
   text-align: center;
   border: 1px solid white;
   color: white;
+  background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
+  background-size: contain;
 `;
 
 export function Inventory() {
@@ -30,7 +32,7 @@ export function Inventory() {
     <Container>
       {accountData && tokens && (
         tokens.map((token) => (  
-          <TokenCard>
+          <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${token.id}.png`}>
             {token.id}
           </TokenCard>
         ))
