@@ -8,7 +8,7 @@ export const ShellTerminal = () => {
   const [{ data: accountData }] = useAccount();
   const [{ data: networkData }] = useNetwork();
 
-  console.log('networkData: ', networkData);
+  // console.log('networkData: ', networkData);
 
   return (
     <div className="shell-wrap">

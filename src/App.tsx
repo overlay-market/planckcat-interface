@@ -21,35 +21,6 @@ export const AppWrapper = styled.div`
 `;
 
 function App() {
-  const [{ data: signerData, error, loading }, getSigner] = useSigner()
-  const [{ data: accountData }] = useAccount();
-  const [{ data: networkData }] = useNetwork();
-  const provider = useProvider();
-  const tokens = useWalletTokens(accountData?.address)
-  // const [contractData, read] = useContractRead(
-  //   {
-  //     addressOrName: '0x2A2e181Cc177974c5D013240C34E1dEf1A3CC31a',
-  //     contractInterface: PlanckCatMinter_ABI,
-  //   },
-  //   'canClaim',
-  //   {
-  //     args: "0x22c17332f5527703D34121704c036d713418c232"
-  //   }
-  // )
-  
-  const contract = useContract({
-    addressOrName: '0x2A2e181Cc177974c5D013240C34E1dEf1A3CC31a',
-    contractInterface: PlanckCatMinter_ABI,
-    signerOrProvider: signerData
-  });
-
-  contract.canClaim(accountData?.address)
-    .then((res: any) => {
-      console.log('canClaim res: ', res)
-    });
-    
-  console.log('networkData ', networkData);
-  console.log('tokens: ', tokens);
 
   return (
     <AppWrapper>

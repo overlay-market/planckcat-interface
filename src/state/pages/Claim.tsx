@@ -1,5 +1,10 @@
-import styled from "styled-components"
+
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
+import { useContract, useSigner, useAccount } from "wagmi";
+import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
+import { useCanClaim } from "../../hooks/useCanClaim";
 
 const Container = styled.div`
   display: flex;
@@ -10,11 +15,21 @@ const Container = styled.div`
 `;
 
 export function Claim() {
+  const [{ data: accountData }] = useAccount();
+  const claimable = useCanClaim(accountData?.address);
+
   return (
     <Container>
-      <TEXT.StandardBody m={'auto'}>
-        Claim Page
-      </TEXT.StandardBody>
+      {claimable == null && (
+        <TEXT.StandardBody m={'auto'}>
+          Checking for claimable tokens...
+        </TEXT.StandardBody>
+      )}
+      {claimable.length == 0 && (
+        <TEXT.StandardBody m={'auto'}>
+          You have no claimable tokens currently.
+        </TEXT.StandardBody>
+      )}
     </Container>
   )
 }
