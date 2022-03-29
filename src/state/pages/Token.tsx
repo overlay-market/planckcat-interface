@@ -4,12 +4,17 @@ import { RouteComponentProps } from 'react-router'
 import axios from "axios";
 import { useTokenAttributes } from "../../hooks/useTokenAttributes";
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
   max-width: 1000px;
-  margin: 50px auto auto auto;
+  margin: 24px auto auto auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 500px;
   flex: 1;
 `;
 
@@ -22,6 +27,15 @@ const ImageCard = styled.div<{backgroundImg?: string}>`
   background-size: contain;
 `;
 
+const Attributes = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const AttributeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
 
 export function Token(
   {match: { params: { tokenId }}
@@ -30,20 +44,32 @@ export function Token(
 
   console.log('tokenAttributes: ', tokenAttributes);
   return (
-    <Container>
+    <Wrapper>
       <TEXT.StandardBody m={'50px auto'}>
         Token #{tokenId}
       </TEXT.StandardBody>
-      <ImageCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
+      <Container>
+        <ImageCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
 
-      {tokenAttributes ? (
-        <>
-        </>
-      ):(
-        <TEXT.StandardBody>
-          Fetching attributes...
-        </TEXT.StandardBody>
-      )}
-    </Container>
+        <Attributes>
+            {tokenAttributes ? (
+              tokenAttributes.map((attribute: any) => (
+                <AttributeContainer>
+                  <TEXT.StandardBody>
+                    {attribute.trait_type}
+                  </TEXT.StandardBody>
+                  <TEXT.StandardBody>
+                    {attribute.value}
+                  </TEXT.StandardBody>
+                </AttributeContainer>
+              ))
+            ):(
+              <TEXT.StandardBody>
+                Fetching attributes...
+              </TEXT.StandardBody>
+            )}
+        </Attributes>
+      </Container>
+    </Wrapper>
   )
 };
