@@ -18,17 +18,14 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const ImageContainer = styled.div`
-  width: 50%;
-`;
-
 const Image = styled.div<{backgroundImg?: string}>`
-  height: 300px;
-  width: 300px;
+  height: 420px;
+  width: 420px;
   text-align: center;
   color: white;
   background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
   background-size: contain;
+  background-repeat: no-repeat
 `;
 
 const Attributes = styled.table`
@@ -38,7 +35,6 @@ const Attributes = styled.table`
   text-transform: lowercase;
   justify-content: space-between;
   margin-left: 8px;
-  width: 50%;
 `;
 
 export function Token(
@@ -52,9 +48,7 @@ export function Token(
         Token #{tokenId} Attributes
       </TEXT.StandardBody>
       <Container>
-        <ImageContainer>
-          <Image backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
-        </ImageContainer>
+        <Image backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
 
         <Attributes>
             {tokenAttributes ? (
