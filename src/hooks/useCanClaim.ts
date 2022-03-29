@@ -9,7 +9,7 @@ export function useCanClaim(accountAddress?: string): any {
     contractInterface: PlanckCatMinter_ABI,
     signerOrProvider: signerData
   });
-  const [claimable, setClaimable] = useState([]);
+  const [claimable, setClaimable] = useState(null);
 
   useEffect(() => {
     if (!contract || !signerData) return;
