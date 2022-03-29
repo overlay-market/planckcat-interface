@@ -41,10 +41,12 @@ const StyledNavLink = styled(NavLink).attrs({
   color: ${({ theme }) => theme.text1};
   font-size: 12px;
   font-weight: 500;
-  padding: 8px 16px;
+  padding: 8px;
   word-break: break-word;
   overflow: hidden;
   white-space: nowrap;
+  margin-top: auto;
+  margin-bottom: auto;
   &.${activeClassName} {
     text-decoration: underline;
     text-underline-offset: 3px;
