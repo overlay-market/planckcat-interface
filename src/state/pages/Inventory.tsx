@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { TEXT } from "../../theme/theme";
 import { useWalletTokens } from "../wallet/hooks";
 import { useAccount } from "wagmi";
+import { StyledInternalLink } from "../../theme/components";
 
 const Container = styled.div`
   display: flex;
@@ -32,9 +33,11 @@ export function Inventory() {
     <Container>
       {accountData && tokens && (
         tokens.map((token) => (  
-          <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${token.id}.png`}>
-            {token.id}
-          </TokenCard>
+          <StyledInternalLink to={`/token/${token.id}`}>
+            <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${token.id}.png`}>
+              {token.id}
+            </TokenCard>
+          </StyledInternalLink>
         ))
       )}
       {!tokens && (
