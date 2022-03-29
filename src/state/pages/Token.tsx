@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
+import { RouteComponentProps } from 'react-router'
 
 const Container = styled.div`
   display: flex;
@@ -9,11 +10,14 @@ const Container = styled.div`
   flex: 1;
 `;
 
-export function Token() {
+export function Token(
+  {match: { params: { tokenId }}
+}: RouteComponentProps<{ tokenId: string }>){
+
   return (
     <Container>
       <TEXT.StandardBody m={'auto'}>
-        Token Page
+        {tokenId}
       </TEXT.StandardBody>
     </Container>
   )
