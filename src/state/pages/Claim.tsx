@@ -40,12 +40,12 @@ export function Claim() {
           Checking for claimable tokens...
         </TEXT.StandardBody>
       )}
-      {claimable.length === 0 && (
+      {claimable && claimable.length === 0 && (
         <TEXT.StandardBody m={'auto'}>
           You have no claimable tokens currently.
         </TEXT.StandardBody>
       )}
-      {claimable.length > 0 && (
+      {claimable && claimable.length > 0 && (
         <>
           <TEXT.StandardBody m={'auto auto 0 auto'}>
             You have {claimable.length} tokens available to claim.

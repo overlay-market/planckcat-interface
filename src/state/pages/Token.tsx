@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
 import { RouteComponentProps } from 'react-router'
-import axios from "axios";
 import { useTokenAttributes } from "../../hooks/useTokenAttributes";
 
 const Wrapper = styled.div`
@@ -16,9 +15,14 @@ const Container = styled.div`
   flex-direction: row;
   height: 500px;
   flex: 1;
+  margin: auto;
 `;
 
-const ImageCard = styled.div<{backgroundImg?: string}>`
+const ImageContainer = styled.div`
+  width: 50%;
+`;
+
+const Image = styled.div<{backgroundImg?: string}>`
   height: 300px;
   width: 300px;
   text-align: center;
@@ -27,41 +31,38 @@ const ImageCard = styled.div<{backgroundImg?: string}>`
   background-size: contain;
 `;
 
-const Attributes = styled.div`
+const Attributes = styled.table`
   display: flex;
   flex-direction: column;
+  color: white;
+  text-transform: lowercase;
+  justify-content: space-between;
+  margin-left: 8px;
+  width: 50%;
 `;
-
-const AttributeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`
 
 export function Token(
   {match: { params: { tokenId }}
 }: RouteComponentProps<{ tokenId: string }>){
   const tokenAttributes = useTokenAttributes(tokenId);
 
-  console.log('tokenAttributes: ', tokenAttributes);
   return (
     <Wrapper>
       <TEXT.StandardBody m={'50px auto'}>
-        Token #{tokenId}
+        Token #{tokenId} Attributes
       </TEXT.StandardBody>
       <Container>
-        <ImageCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
+        <ImageContainer>
+          <Image backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
+        </ImageContainer>
 
         <Attributes>
             {tokenAttributes ? (
               tokenAttributes.map((attribute: any) => (
-                <AttributeContainer>
-                  <TEXT.StandardBody>
-                    {attribute.trait_type}
-                  </TEXT.StandardBody>
-                  <TEXT.StandardBody>
-                    {attribute.value}
-                  </TEXT.StandardBody>
-                </AttributeContainer>
+                <tr>
+                  <th>{attribute.trait_type}:</th>
+                  <td>{attribute.value}</td>
+                </tr>
               ))
             ):(
               <TEXT.StandardBody>
