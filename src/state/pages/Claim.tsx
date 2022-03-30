@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
 import { useContract, useSigner, useAccount, useContractWrite, useContractRead } from "wagmi";
@@ -31,11 +31,20 @@ const ClaimButton = styled.button`
 
 export function Claim() {
   const [{ data: accountData }] = useAccount();
-  const claimable = useCanClaim(accountData?.address ?? '');
-  // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
-  console.log('claimable: ', claimable);
-  
-  const claimAction = useClaimCallback(17);
+  // const claimable = useCanClaim(accountData?.address ?? '');
+  const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
+  const { callback: claimCallback } = useClaimCallback(17);
+
+  const handleClaim = useCallback(() => {
+    if (!claimCallback) return;
+    claimCallback()
+      .then((response: any) => {
+        console.log('handleClaim response: ', response);
+      })
+      .catch((error: any) => {
+        console.error('handleClaim error: ', error);
+      })
+  }, [claimCallback])
 
   return (
     <Container>
@@ -54,7 +63,7 @@ export function Claim() {
           <TEXT.StandardBody m={'auto auto 0 auto'}>
             You have {claimable.length} tokens available to claim.
           </TEXT.StandardBody>
-          <ClaimButton onClick={claimAction}>
+          <ClaimButton onClick={handleClaim}>
             Claim
           </ClaimButton>
         </>
