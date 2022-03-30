@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
-import { useContract, useSigner, useAccount, useContractWrite } from "wagmi";
+import { useContract, useSigner, useAccount, useContractWrite, useContractRead } from "wagmi";
 import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 import { useCanClaim } from "../../hooks/useCanClaim";
 
@@ -30,9 +30,10 @@ const ClaimButton = styled.button`
 
 export function Claim() {
   const [{ data: accountData }] = useAccount();
-  const claimable = useCanClaim(accountData?.address);
-
-  // const claimable = [1,3]
+  const claimable = useCanClaim(accountData?.address ?? '');
+  // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
+  console.log('claimable: ', claimable);
+  
   return (
     <Container>
       {claimable == null && (

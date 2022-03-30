@@ -12,7 +12,7 @@ export function useCanClaim(accountAddress?: string): any {
   const [claimable, setClaimable] = useState(null);
 
   useEffect(() => {
-    if (!contract || !signerData) return;
+    if (accountAddress === '' || !contract || !signerData) return;
 
     (async () => {
       setClaimable(await contract.canClaim(accountAddress))
