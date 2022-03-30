@@ -34,9 +34,7 @@ export function Claim() {
   const [{ data: accountData }] = useAccount();
   // const claimable = useCanClaim(accountData?.address ?? '');
   const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
-  const { callback: claimCallback } = useClaimCallback(17);
-
-  console.log('claimable: ', claimable);
+  const { callback: claimCallback } = useClaimCallback(claimable ? claimable[0] : '');
 
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
