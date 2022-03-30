@@ -5,6 +5,7 @@ import { TEXT } from "../../theme/theme";
 import { useContract, useSigner, useAccount, useContractWrite, useContractRead } from "wagmi";
 import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 import { useCanClaim } from "../../hooks/useCanClaim";
+import { useClaimCallback } from "../../hooks/useClaimCallback";
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +35,8 @@ export function Claim() {
   // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
   console.log('claimable: ', claimable);
   
+  const claimAction = useClaimCallback(17);
+
   return (
     <Container>
       {claimable == null && (
@@ -51,7 +54,7 @@ export function Claim() {
           <TEXT.StandardBody m={'auto auto 0 auto'}>
             You have {claimable.length} tokens available to claim.
           </TEXT.StandardBody>
-          <ClaimButton>
+          <ClaimButton onClick={claimAction}>
             Claim
           </ClaimButton>
         </>
