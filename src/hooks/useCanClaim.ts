@@ -1,4 +1,5 @@
 import { useMemo, useEffect, useState } from 'react';
+import { BigNumber, BigNumberish, Bytes, BytesLike } from 'ethers';
 import { useSigner, useContract, useBlockNumber } from 'wagmi';
 import PlanckCatMinter_ABI from '../constants/abis/PlanckCatMinter.json';
 
@@ -15,7 +16,12 @@ export function useCanClaim(accountAddress?: string): any {
     if (accountAddress === '' || !contract || !signerData) return;
 
     (async () => {
-      setClaimable(await contract.canClaim(accountAddress))
+      await contract.canClaim(accountAddress)
+                    .then((response: any) => {
+                      let temp: any = [];
+                      response.map((token: any) => temp.push(token.toNumber()))
+                      setClaimable(temp);
+                    })  
     })();
   }, [contract, accountAddress, signerData]);
 

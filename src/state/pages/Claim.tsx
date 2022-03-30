@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
+import { utils } from "ethers";
 import { useContract, useSigner, useAccount, useContractWrite, useContractRead } from "wagmi";
 import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 import { useCanClaim } from "../../hooks/useCanClaim";
@@ -34,6 +35,8 @@ export function Claim() {
   // const claimable = useCanClaim(accountData?.address ?? '');
   const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
   const { callback: claimCallback } = useClaimCallback(17);
+
+  console.log('claimable: ', claimable);
 
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
