@@ -36,16 +36,40 @@ export function Claim() {
   const claimable = useCanClaim(accountData?.address ?? '');
   // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
   const { callback: claimCallback } = useClaimCallback(claimable ? claimable[0] : '');
+  const [{ attemptingTransaction, transactionErrorMessage, transactionHash }, setClaimState] = useState<{
+    attemptingTransaction: boolean;
+    transactionErrorMessage: string | undefined;
+    transactionHash: undefined,
+  }>({
+    attemptingTransaction: false,
+    transactionErrorMessage: undefined,
+    transactionHash: undefined,
+  });
 
   console.log('claimable: ', claimable);
-  
+
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
+    setClaimState({
+      attemptingTransaction: true,
+      transactionErrorMessage: undefined,
+      transactionHash: undefined
+    })
     claimCallback()
       .then((response: any) => {
+        setClaimState({
+          attemptingTransaction: false,
+          transactionErrorMessage: undefined,
+          transactionHash: response
+        })
         console.log('handleClaim response: ', response);
       })
       .catch((error: any) => {
+        setClaimState({
+          attemptingTransaction: false,
+          transactionErrorMessage: error,
+          transactionHash: undefined
+        })
         console.error('handleClaim error: ', error);
       })
   }, [claimCallback])
