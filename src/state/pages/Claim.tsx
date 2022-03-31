@@ -91,9 +91,21 @@ export function Claim() {
           <TEXT.StandardBody m={'auto auto 0 auto'}>
             You have {claimable.length} tokens available to claim.
           </TEXT.StandardBody>
-          <ClaimButton onClick={handleClaim}>
-            Claim
-          </ClaimButton>
+          {attemptingTransaction && (
+            <ClaimButton>
+              Claiming...
+            </ClaimButton>
+          )}
+          {transactionHash !== undefined && (
+            <ClaimButton>
+              Claimed!
+            </ClaimButton>
+          )}
+          {!attemptingTransaction && transactionHash === undefined && (
+            <ClaimButton onClick={handleClaim}>
+              Claim
+            </ClaimButton>
+          )}
         </>
       )}
     </Container>
