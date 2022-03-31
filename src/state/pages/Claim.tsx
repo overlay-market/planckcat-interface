@@ -7,6 +7,7 @@ import { useContract, useSigner, useAccount, useContractWrite, useContractRead }
 import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 import { useCanClaim } from "../../hooks/useCanClaim";
 import { useClaimCallback } from "../../hooks/useClaimCallback";
+import { createImportSpecifier } from "typescript";
 
 const Container = styled.div`
   display: flex;
@@ -32,10 +33,12 @@ const ClaimButton = styled.button`
 
 export function Claim() {
   const [{ data: accountData }] = useAccount();
-  // const claimable = useCanClaim(accountData?.address ?? '');
-  const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
+  const claimable = useCanClaim(accountData?.address ?? '');
+  // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
   const { callback: claimCallback } = useClaimCallback(claimable ? claimable[0] : '');
 
+  console.log('claimable: ', claimable);
+  
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
     claimCallback()
