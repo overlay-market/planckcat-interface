@@ -3,11 +3,10 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { TEXT } from "../../theme/theme";
 import { utils } from "ethers";
-import { useContract, useSigner, useAccount, useContractWrite, useContractRead } from "wagmi";
+import { useContract, useSigner, useAccount, useContractWrite, useContractRead, useNetwork } from "wagmi";
 import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 import { useCanClaim } from "../../hooks/useCanClaim";
 import { useClaimCallback } from "../../hooks/useClaimCallback";
-import { createImportSpecifier } from "typescript";
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +33,6 @@ const ClaimButton = styled.button`
 export function Claim() {
   const [{ data: accountData }] = useAccount();
   const claimable = useCanClaim(accountData?.address ?? '');
-  // const claimable = useCanClaim("0xe64d330cc8654520815aa3ce90613d89b855e3a0");
   const { callback: claimCallback } = useClaimCallback(claimable ? claimable[0] : '');
   const [{ attemptingTransaction, transactionErrorMessage, transactionHash }, setClaimState] = useState<{
     attemptingTransaction: boolean;
@@ -47,6 +45,9 @@ export function Claim() {
   });
 
   console.log('claimable: ', claimable);
+
+  const [{ data: networkData, error, loading }, switchNetwork] = useNetwork()
+  console.log('networkData: ', networkData)
 
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
