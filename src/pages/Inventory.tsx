@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { useAccount } from "wagmi";
-import { TEXT } from "../../theme/theme";
-import { useWalletTokens } from "../wallet/hooks";
-import { StyledInternalLink } from "../../theme/components";
+import { TEXT } from "../theme/theme";
+import { useWalletTokens } from "../state/wallet/hooks";
+import { StyledInternalLink } from "../theme/components";
 
 const Container = styled.div`
   display: flex;

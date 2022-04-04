@@ -2,11 +2,11 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { utils } from "ethers";
-import { TEXT } from "../../theme/theme";
-import { useCanClaim } from "../../hooks/useCanClaim";
-import { useClaimCallback } from "../../hooks/useClaimCallback";
+import { TEXT } from "../theme/theme";
+import { useCanClaim } from "../hooks/useCanClaim";
+import { useClaimCallback } from "../hooks/useClaimCallback";
 import { useContract, useSigner, useAccount, useContractWrite, useContractRead, useNetwork } from "wagmi";
-import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
+import PlanckCatMinter_ABI from '../constants/abis/PlanckCatMinter.json';
 
 const Container = styled.div`
   display: flex;

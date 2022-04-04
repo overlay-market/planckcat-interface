@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { TEXT } from "../../theme/theme";
+import { TEXT } from "../theme/theme";
 import { RouteComponentProps } from 'react-router'
-import { useTokenAttributes } from "../../hooks/useTokenAttributes";
+import { useTokenAttributes } from "../hooks/useTokenAttributes";
 
 const Wrapper = styled.div`
   display: flex;
@@ -80,9 +80,9 @@ export function Token(
                 </StyledRow>
               ))
             ):(
-              <TEXT.StandardBody>
-                Fetching attributes...
-              </TEXT.StandardBody>
+              <StyledRow>
+                <th>loading...</th>
+              </StyledRow>
             )}
         </TokenAttributes>
       </TokenInfoContainer>

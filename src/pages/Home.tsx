@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAccount } from "wagmi";
-import { TEXT } from "../../theme/theme";
-import { ShellTerminal } from "../../components/ShellTerminal/ShellTerminal";
+import { TEXT } from "../theme/theme";
+import { ShellTerminal } from "../components/ShellTerminal/ShellTerminal";
 
 const ImgWrapper = styled.div`
   display: flex;
