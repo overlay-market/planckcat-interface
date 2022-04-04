@@ -22,6 +22,15 @@ const FlexRowContainer = styled.div`
   margin: auto;
 `
 
+const NavigationContainer = styled.div`
+  display: none;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    display: flex;
+    margin: auto;
+  `};
+`;
+
 const NavigationLink = styled(StyledInternalLink)`
   margin-top: auto;
   margin-bottom: auto;
@@ -83,14 +92,18 @@ export const Header = () => {
           PlanckCatDAO
         </NavigationLink>
 
-        <StyledNavLink to={'/Claim'}>
-          Claim
-        </StyledNavLink>
 
-        <StyledNavLink to={'/Inventory'}>
-          Inventory
-        </StyledNavLink>
-        <ConnectWallet />
+        <NavigationContainer>
+          <StyledNavLink to={'/Claim'}>
+            Claim
+          </StyledNavLink>
+
+          <StyledNavLink to={'/Inventory'}>
+            Inventory
+          </StyledNavLink>
+          <ConnectWallet />
+        </NavigationContainer>
+
         <SlideMenu open={open} />
       </FlexRowContainer>
 
