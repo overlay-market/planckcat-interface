@@ -1,7 +1,7 @@
 import styled from "styled-components"
+import { useAccount } from "wagmi";
 import { TEXT } from "../../theme/theme";
 import { useWalletTokens } from "../wallet/hooks";
-import { useAccount } from "wagmi";
 import { StyledInternalLink } from "../../theme/components";
 
 const Container = styled.div`
@@ -11,10 +11,11 @@ const Container = styled.div`
   height: 500px;
   margin: 50px auto auto auto;
   flex: 1;
-  padding: 0 48px;
+  padding: 0 28px;
 
   ${({ theme }) => theme.mediaWidth.minSmall`
     max-width: 1000px;
+    padding: 0 48px;
   `};
 `;
 
@@ -45,7 +46,7 @@ export function Inventory() {
         ))
       )}
       {!tokens && (
-        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'} lineHeight={'2rem'}>
           Wallet does not hold any tokens.
         </TEXT.StandardBody>
       )}

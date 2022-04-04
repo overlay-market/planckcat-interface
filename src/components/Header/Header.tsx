@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import ConnectWalletModal from "../ConnectWallet/ConnectWalletModal";
-import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { TEXT } from "../../theme/theme";
-import { StyledInternalLink } from "../../theme/components";
 import { NavLink, useLocation } from "react-router-dom";
-import SlideMenu from "../SlideMenu/SlideMenu";
+import { StyledInternalLink } from "../../theme/components";
+import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { enableLock, disableLock } from "../../utils/scrollLock";
 import Burger from "../Burger/Burger";
+import SlideMenu from "../SlideMenu/SlideMenu";
+import ConnectWalletModal from "../ConnectWallet/ConnectWalletModal";
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   display: block;
   width: 100%;
 `;
@@ -44,7 +44,7 @@ const MenuLink = styled(NavigationLink)`
   font-size: 12px;
 `
 
-const activeClassName = 'ACTIVE'
+const activeClassName = 'ACTIVE';
 
 const StyledNavLink = styled(NavLink).attrs({
   activeClassName,
@@ -67,7 +67,7 @@ const StyledNavLink = styled(NavLink).attrs({
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-`
+`;
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
@@ -91,12 +91,11 @@ export const Header = () => {
     }, [open]);
 
   return (
-    <Container>
+    <HeaderContainer>
       <FlexRowContainer>
         <NavigationLink to={'/'} noEffect={true}>
           PlanckCatDAO
         </NavigationLink>
-
 
         <DesktopNavigationContainer>
           <StyledNavLink to={'/Claim'}>
@@ -112,8 +111,7 @@ export const Header = () => {
         <Burger open={open} setOpen={setOpen} aria-controls={menuId} />
         <SlideMenu open={open} />
       </FlexRowContainer>
-
       <ConnectWalletModal />
-    </Container>
+    </HeaderContainer>
   )
 };

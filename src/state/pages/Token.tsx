@@ -5,37 +5,58 @@ import { useTokenAttributes } from "../../hooks/useTokenAttributes";
 
 const Wrapper = styled.div`
   display: flex;
+  margin: auto;
   flex-direction: column;
   max-width: 1000px;
-  margin: 24px auto auto auto;
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 500px;
-  flex: 1;
-  margin: auto;
-`;
-
-const Image = styled.div<{backgroundImg?: string}>`
-  height: 420px;
-  width: 420px;
-  text-align: center;
-  color: white;
-  background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
-  background-size: contain;
-  background-repeat: no-repeat
-`;
-
-const Attributes = styled.table`
+const TokenInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  margin: auto auto 50px;
+  height: auto;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    height: 500px;
+    flex-direction: row;
+  `}
+`;
+
+const TokenImage = styled.div<{backgroundImg?: string}>`
+  height: 333px;
+  width: 333px;
+  color: white;
+  text-align: center;
+  background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    height: 420px;
+    width: 420px;
+  `}
+`;
+
+const TokenAttributes = styled.table`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: white;
   text-transform: lowercase;
-  justify-content: space-between;
-  margin-left: 8px;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    margin-left: 8px;
+  `}
 `;
+
+const StyledRow = styled.tr`
+  margin: 8px 0;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    margin: none;
+  `}
+`
 
 export function Token(
   {match: { params: { tokenId }}
@@ -47,24 +68,24 @@ export function Token(
       <TEXT.StandardBody m={'50px auto'}>
         Token #{tokenId} Attributes
       </TEXT.StandardBody>
-      <Container>
-        <Image backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
+      <TokenInfoContainer>
+        <TokenImage backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
 
-        <Attributes>
+        <TokenAttributes>
             {tokenAttributes ? (
               tokenAttributes.map((attribute: any) => (
-                <tr>
+                <StyledRow>
                   <th>{attribute.trait_type}:</th>
                   <td>{attribute.value}</td>
-                </tr>
+                </StyledRow>
               ))
             ):(
               <TEXT.StandardBody>
                 Fetching attributes...
               </TEXT.StandardBody>
             )}
-        </Attributes>
-      </Container>
+        </TokenAttributes>
+      </TokenInfoContainer>
     </Wrapper>
   )
 };

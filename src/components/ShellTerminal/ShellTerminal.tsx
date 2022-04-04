@@ -21,8 +21,6 @@ export const ShellTerminal = () => {
   const [{ data: accountData }] = useAccount();
   const [{ data: networkData }] = useNetwork();
 
-  // console.log('networkData: ', networkData);
-
   return (
     <ShellWrap>
       <p className="shell-top-bar">/Users/PCD/Documents/interface/</p>

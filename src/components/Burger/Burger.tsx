@@ -26,8 +26,8 @@ export const StyledBurger = styled.button<{open: boolean}>`
   margin: auto 0;
 
   span {
-    width: ${({ open }) => ( open ? '35px' : '40px' )};
-    height: ${({ open }) => ( open ? '5px' : '5px' )};
+    width: ${({ open }) => ( open ? '34px' : '40px' )};
+    height: ${({ open }) => ( open ? '4px' : '4px' )};
     background: ${({ theme, open }) => open ? theme.bg2 : theme.bg2};
     border-radius: 10px;
     transition: all 0.3s linear;

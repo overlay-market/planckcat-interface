@@ -1,12 +1,12 @@
 
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { TEXT } from "../../theme/theme";
 import { utils } from "ethers";
-import { useContract, useSigner, useAccount, useContractWrite, useContractRead, useNetwork } from "wagmi";
-import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
+import { TEXT } from "../../theme/theme";
 import { useCanClaim } from "../../hooks/useCanClaim";
 import { useClaimCallback } from "../../hooks/useClaimCallback";
+import { useContract, useSigner, useAccount, useContractWrite, useContractRead, useNetwork } from "wagmi";
+import PlanckCatMinter_ABI from '../../constants/abis/PlanckCatMinter.json';
 
 const Container = styled.div`
   display: flex;
@@ -83,18 +83,18 @@ export function Claim() {
   return (
     <Container>
       {claimable == null && (
-        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'} lineHeight={'2rem'}>
           Checking for claimable tokens...
         </TEXT.StandardBody>
       )}
       {claimable && claimable.length === 0 && (
-        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'} lineHeight={'2rem'}>
           You have no claimable tokens currently.
         </TEXT.StandardBody>
       )}
       {claimable && claimable.length > 0 && (
         <>
-          <TEXT.StandardBody m={'auto auto 0 auto'} textAlign={'center'}>
+          <TEXT.StandardBody m={'auto auto 0 auto'} textAlign={'center'} lineHeight={'2rem'}>
             You have {claimable.length} tokens available to claim.
           </TEXT.StandardBody>
           {attemptingTransaction && (
