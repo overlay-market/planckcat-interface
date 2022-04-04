@@ -1,10 +1,12 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ConnectWalletModal from "../ConnectWallet/ConnectWalletModal";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
 import { TEXT } from "../../theme/theme";
 import { StyledInternalLink } from "../../theme/components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import SlideMenu from "../SlideMenu/SlideMenu";
+import { enableLock, disableLock } from "../../utils/scrollLock";
 
 const Container = styled.div`
   display: block;
@@ -54,6 +56,26 @@ const StyledNavLink = styled(NavLink).attrs({
 `
 
 export const Header = () => {
+  const [open, setOpen] = useState(false);
+  const location = useLocation().pathname;
+  const menuId = "main-menu";
+
+    // close menu when at new route
+    useEffect(() => {
+      if (open) {
+        setOpen((open) => false)
+      };
+    }, [location])
+  
+    // disable scroll when mobile menu open
+    useEffect(() => {
+      if (open) {
+        enableLock();
+      } else {
+        disableLock();
+      }
+    }, [open]);
+
   return (
     <Container>
       <FlexRowContainer>
@@ -69,6 +91,7 @@ export const Header = () => {
           Inventory
         </StyledNavLink>
         <ConnectWallet />
+        <SlideMenu open={open} />
       </FlexRowContainer>
 
       <ConnectWalletModal />
