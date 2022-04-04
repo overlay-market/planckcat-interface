@@ -4,6 +4,19 @@ import PlanckCat from "../../assets/planck-cat.png"
 import { useAccount, useNetwork } from "wagmi";
 // @ts-nocheck
 
+const ShellWrap = styled.div`
+  font: 16px Arial, sans-serif;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  margin: 50px 12px 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    width: 500px;
+    margin: 100px auto 0 auto;
+  `};
+`
 export const ShellTerminal = () => {
   const [{ data: accountData }] = useAccount();
   const [{ data: networkData }] = useNetwork();
@@ -11,7 +24,7 @@ export const ShellTerminal = () => {
   // console.log('networkData: ', networkData);
 
   return (
-    <div className="shell-wrap">
+    <ShellWrap>
       <p className="shell-top-bar">/Users/PCD/Documents/interface/</p>
       <ul className="shell-body">
         <li>cd&nbsp;/Users/PCD/Documents/interface/pages/home/</li>
@@ -34,6 +47,6 @@ export const ShellTerminal = () => {
           <li>Welcome Anonymous User! Please connect wallet.</li>
         )}
       </ul>
-    </div>
+    </ShellWrap>
   );
 };

@@ -7,6 +7,7 @@ import { StyledInternalLink } from "../../theme/components";
 import { NavLink, useLocation } from "react-router-dom";
 import SlideMenu from "../SlideMenu/SlideMenu";
 import { enableLock, disableLock } from "../../utils/scrollLock";
+import Burger from "../Burger/Burger";
 
 const Container = styled.div`
   display: block;
@@ -17,17 +18,20 @@ const FlexRowContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 48px;
+  padding: 40px 28px;
   max-width: 1000px;
   margin: auto;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    padding: 48px;
+  `};
 `
 
-const NavigationContainer = styled.div`
+const DesktopNavigationContainer = styled.div`
   display: none;
 
   ${({ theme }) => theme.mediaWidth.minSmall`
     display: flex;
-    margin: auto;
   `};
 `;
 
@@ -52,12 +56,13 @@ const StyledNavLink = styled(NavLink).attrs({
   color: ${({ theme }) => theme.text1};
   font-size: 12px;
   font-weight: 500;
-  padding: 8px;
+  padding: 12px;
   word-break: break-word;
   overflow: hidden;
   white-space: nowrap;
   margin-top: auto;
   margin-bottom: auto;
+  margin-right: 60px;
   &.${activeClassName} {
     text-decoration: underline;
     text-underline-offset: 3px;
@@ -93,7 +98,7 @@ export const Header = () => {
         </NavigationLink>
 
 
-        <NavigationContainer>
+        <DesktopNavigationContainer>
           <StyledNavLink to={'/Claim'}>
             Claim
           </StyledNavLink>
@@ -102,8 +107,9 @@ export const Header = () => {
             Inventory
           </StyledNavLink>
           <ConnectWallet />
-        </NavigationContainer>
+        </DesktopNavigationContainer>
 
+        <Burger open={open} setOpen={setOpen} aria-controls={menuId} />
         <SlideMenu open={open} />
       </FlexRowContainer>
 

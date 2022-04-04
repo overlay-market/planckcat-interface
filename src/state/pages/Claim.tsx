@@ -11,9 +11,14 @@ import { useClaimCallback } from "../../hooks/useClaimCallback";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 420px;
   margin: 50px auto auto auto;
   flex: 1;
+  padding: 0 48px;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    max-width: 1000px;
+  `};
 `;
 
 const ClaimButton = styled.button`
@@ -78,18 +83,18 @@ export function Claim() {
   return (
     <Container>
       {claimable == null && (
-        <TEXT.StandardBody m={'auto'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
           Checking for claimable tokens...
         </TEXT.StandardBody>
       )}
       {claimable && claimable.length === 0 && (
-        <TEXT.StandardBody m={'auto'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
           You have no claimable tokens currently.
         </TEXT.StandardBody>
       )}
       {claimable && claimable.length > 0 && (
         <>
-          <TEXT.StandardBody m={'auto auto 0 auto'}>
+          <TEXT.StandardBody m={'auto auto 0 auto'} textAlign={'center'}>
             You have {claimable.length} tokens available to claim.
           </TEXT.StandardBody>
           {attemptingTransaction && (

@@ -27,11 +27,11 @@ const StyledMenu = styled.nav<{open: boolean, height: number, width: number}>`
 
 const StyledInternalLink = styled(NavLink)`
   color: ${({ theme }) => theme.text1};
-  font-size: 32px;
+  font-size: 24px;
   text-align: center;
   text-decoration: none;
   font-weight: 700;
-  margin: 16px 0;
+  margin: 24px 0;
   border: none !important;
 
   :focus {

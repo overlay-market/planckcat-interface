@@ -9,9 +9,13 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   height: 500px;
-  max-width: 1000px;
   margin: 50px auto auto auto;
   flex: 1;
+  padding: 0 48px;
+
+  ${({ theme }) => theme.mediaWidth.minSmall`
+    max-width: 1000px;
+  `};
 `;
 
 const TokenCard = styled.div<{backgroundImg?: string}>`
@@ -41,7 +45,7 @@ export function Inventory() {
         ))
       )}
       {!tokens && (
-        <TEXT.StandardBody m={'auto'}>
+        <TEXT.StandardBody m={'auto'} textAlign={'center'}>
           Wallet does not hold any tokens.
         </TEXT.StandardBody>
       )}
