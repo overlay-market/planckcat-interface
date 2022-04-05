@@ -89,6 +89,12 @@ const SlideMenu = ({
       <Content>
         <StyledInternalLink 
           tabIndex={tabIndex} 
+          to={'/'}
+          >
+          HOME
+        </StyledInternalLink>
+        <StyledInternalLink 
+          tabIndex={tabIndex} 
           to={'/claim'}
           >
           CLAIM
