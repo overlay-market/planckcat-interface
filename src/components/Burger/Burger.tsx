@@ -29,7 +29,7 @@ export const StyledBurger = styled.button<{open: boolean}>`
     width: ${({ open }) => ( open ? '34px' : '40px' )};
     height: ${({ open }) => ( open ? '4px' : '4px' )};
     background: ${({ theme, open }) => open ? theme.bg2 : theme.bg2};
-    border-radius: 10px;
+    border-radius: 2px;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 0px;
