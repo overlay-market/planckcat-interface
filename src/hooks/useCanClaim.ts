@@ -1,5 +1,4 @@
 import { useMemo, useEffect, useState } from 'react';
-import { BigNumber, BigNumberish, Bytes, BytesLike } from 'ethers';
 import { useSigner, useContract, useConnect, useNetwork } from 'wagmi';
 import PlanckCatMinter_ABI from '../constants/abis/PlanckCatMinter.json';
 import { MINTER_ADDRESS } from '../constants/addresses';
