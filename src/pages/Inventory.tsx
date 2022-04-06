@@ -3,6 +3,7 @@ import { useAccount } from "wagmi";
 import { TEXT } from "../theme/theme";
 import { useWalletTokens } from "../state/wallet/hooks";
 import { StyledInternalLink } from "../theme/components";
+import { useTokenUris } from "../hooks/useTokenURI";
 
 const Container = styled.div`
   display: flex;
@@ -32,8 +33,11 @@ const TokenCard = styled.div<{backgroundImg?: string}>`
 export function Inventory() {
   const [{ data: accountData }] = useAccount();
   const { tokens } = useWalletTokens(accountData?.address);
+  // const uris = useTokenUris(tokens ?? []);
 
-  console.log('tokens: ' , tokens);
+  console.log('tokens: ', tokens);
+
+
   return (
     <Container>
       {accountData && tokens && (

@@ -17,12 +17,10 @@ export function useTokenUri(tokenId?: string | number): any {
   useEffect(() => {
     if (!tokenId || !contract || !signerData) return;
 
-    console.log('hello');
     (async () => {
-      console.log('hello 2');
       await contract.tokenURI(tokenId)
                     .then((response: string) => {
-                      let prepend = response.replace("ipfs://", "https://ipfs.io/ipfs/")
+                      let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
                       setUri(prepend);
                     }) 
     })();
@@ -32,3 +30,33 @@ export function useTokenUri(tokenId?: string | number): any {
     return uri ? uri : null;
   }, [uri])
 };
+
+export function useTokenUris(tokenIds: []): string[] {
+  const [{ data: signerData }] = useSigner();
+  const contract = useContract({
+    addressOrName: '0xc9B28946144E3A0e02fcC119a622E30565916784',
+    contractInterface: PlanckCat_ABI,
+    signerOrProvider: signerData
+  });
+
+  const [uris, setUris] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (tokenIds === [] || !contract || !signerData) return;
+
+    tokenIds.forEach((id) => {
+      (async () => {
+        await contract.tokenURI(id)
+                    .then((response: string) => {
+                      let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
+                      setUris(uris => [...uris, prepend]);
+                    })
+        })();
+    });
+
+  }, [contract, tokenIds, signerData]);
+
+  return useMemo(() => {
+    return uris ? uris : []
+  }, [uris])
+}

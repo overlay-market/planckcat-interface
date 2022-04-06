@@ -1,17 +1,18 @@
 import { useMemo, useEffect, useState } from 'react';
 import axios from 'axios';
 
-export function useTokenAttributes(tokenId: string): any {
+export function useTokenAttributes(uri: string): any {
   const [attributes, setAttributes] = useState([]);
-  
+
   useEffect(() => {
     (async () => {
-      await axios.get(`https://planckcat.mypinata.cloud/ipfs/QmXiTKKMxuLwTxQQpLvQkxunwuuhXpKEwow3CuLXy7LttM/${tokenId}.json`)
+      await axios.get(uri)
         .then((response: any) => {
+          console.log('response from useTokenAttributes: ', response);
           setAttributes(response.data.attributes);
         })
     })();
-  }, [tokenId]);
+  }, [uri]);
 
   return useMemo(() => {
     return attributes ? attributes : null;
