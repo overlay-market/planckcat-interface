@@ -7,6 +7,7 @@ import { useCanClaim } from "../hooks/useCanClaim";
 import { useClaimCallback } from "../hooks/useClaimCallback";
 import { useContract, useSigner, useAccount, useContractWrite, useContractRead, useNetwork } from "wagmi";
 import PlanckCatMinter_ABI from '../constants/abis/PlanckCatMinter.json';
+import { useTokenUri } from "../hooks/useTokenURI";
 
 const Container = styled.div`
   display: flex;
@@ -49,10 +50,10 @@ export function Claim() {
     transactionHash: undefined,
   });
 
-  console.log('claimable: ', claimable);
+  const uri = useTokenUri(7);
+  console.log('uri: ', uri);
 
   const [{ data: networkData, error, loading }, switchNetwork] = useNetwork()
-  console.log('networkData: ', networkData)
 
   const handleClaim = useCallback(() => {
     if (!claimCallback) return;
