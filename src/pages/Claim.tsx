@@ -50,9 +50,6 @@ export function Claim() {
     transactionHash: undefined,
   });
 
-  const uri = useTokenUri(7);
-  console.log('uri: ', uri);
-
   const [{ data: networkData, error, loading }, switchNetwork] = useNetwork()
 
   const handleClaim = useCallback(() => {

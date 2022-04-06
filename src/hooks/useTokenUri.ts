@@ -31,32 +31,26 @@ export function useTokenUri(tokenId?: string | number): any {
   }, [uri])
 };
 
-export function useTokenUris(tokenIds: []): string[] {
+export function useTokenUris(tokenIds: string[]): string[] {
   const [{ data: signerData }] = useSigner();
   const contract = useContract({
     addressOrName: '0xc9B28946144E3A0e02fcC119a622E30565916784',
     contractInterface: PlanckCat_ABI,
     signerOrProvider: signerData
   });
-
   const [uris, setUris] = useState<any[]>([]);
 
-  useEffect(() => {
-    if (tokenIds === [] || !contract || !signerData) return;
-
-    tokenIds.forEach((id) => {
+  useMemo(() => {
+    tokenIds.forEach((id, key) => {
       (async () => {
         await contract.tokenURI(id)
                     .then((response: string) => {
                       let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
-                      setUris(uris => [...uris, prepend]);
+                      setUris(uris => [prepend]);
                     })
         })();
     });
-
-  }, [contract, tokenIds, signerData]);
-
-  return useMemo(() => {
-    return uris ? uris : []
-  }, [uris])
+  }, [tokenIds, contract])
+  
+  return uris;
 }
