@@ -33,6 +33,7 @@ const TokenImage = styled.div<{ backgroundImg?: string }>`
     backgroundImg ?? backgroundImg}");
   background-repeat: no-repeat;
   background-size: contain;
+  margin: auto;
 
   ${({ theme }) => theme.mediaWidth.minSmall`
     height: 420px;
@@ -42,13 +43,17 @@ const TokenImage = styled.div<{ backgroundImg?: string }>`
 
 const TokenAttributes = styled.table`
   display: flex;
+  width: 333px;
   flex-direction: column;
   justify-content: space-between;
   color: white;
   text-transform: lowercase;
+  font-size: 12px;
 
   ${({ theme }) => theme.mediaWidth.minSmall`
     margin-left: 8px;
+    width: auto;
+    font-size: 16px;
   `}
 `;
 
