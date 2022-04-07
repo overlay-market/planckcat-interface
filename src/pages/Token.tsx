@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { TEXT } from "../theme/theme";
-import { RouteComponentProps } from 'react-router'
+import { RouteComponentProps } from "react-router";
 import { useTokenAttributes } from "../hooks/useTokenAttributes";
+import { useTokenUri } from "../hooks/useTokenURI";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,12 +24,13 @@ const TokenInfoContainer = styled.div`
   `}
 `;
 
-const TokenImage = styled.div<{backgroundImg?: string}>`
+const TokenImage = styled.div<{ backgroundImg?: string }>`
   height: 333px;
   width: 333px;
   color: white;
   text-align: center;
-  background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
+  background-image: url("${({ backgroundImg }) =>
+    backgroundImg ?? backgroundImg}");
   background-repeat: no-repeat;
   background-size: contain;
 
@@ -56,36 +58,45 @@ const StyledRow = styled.tr`
   ${({ theme }) => theme.mediaWidth.minSmall`
     margin: none;
   `}
-`
+`;
 
-export function Token(
-  {match: { params: { tokenId }}
-}: RouteComponentProps<{ tokenId: string }>){
-  const tokenAttributes = useTokenAttributes(tokenId);
+export function Token({
+  match: {
+    params: { tokenId },
+  },
+}: RouteComponentProps<{ tokenId: string }>) {
+  const tokenUri = useTokenUri(tokenId);
+  const { tokenAttributes, tokenImageUrl } = useTokenAttributes(tokenUri);
 
   return (
     <Wrapper>
-      <TEXT.StandardBody m={'50px auto'}>
+      <TEXT.StandardBody m={"50px auto"}>
         Token #{tokenId} Attributes
       </TEXT.StandardBody>
       <TokenInfoContainer>
-        <TokenImage backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`} />
+        {tokenImageUrl ? (
+          <TokenImage
+            backgroundImg={tokenImageUrl}
+          />
+        ):(
+          <TokenImage />
+        )}
 
         <TokenAttributes>
-            {tokenAttributes ? (
-              tokenAttributes.map((attribute: any) => (
-                <StyledRow>
-                  <th>{attribute.trait_type}:</th>
-                  <td>{attribute.value}</td>
-                </StyledRow>
-              ))
-            ):(
+          {tokenAttributes ? (
+            tokenAttributes.map((attribute: any) => (
               <StyledRow>
-                <th>loading...</th>
+                <th>{attribute.trait_type}:</th>
+                <td>{attribute.value}</td>
               </StyledRow>
-            )}
+            ))
+          ) : (
+            <StyledRow>
+              <th>loading...</th>
+            </StyledRow>
+          )}
         </TokenAttributes>
       </TokenInfoContainer>
     </Wrapper>
-  )
-};
+  );
+}

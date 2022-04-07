@@ -4,7 +4,7 @@ import { useAccountQuery } from '../data/enhanced';
 export function useWalletTokens(
   address: string | null | undefined
 ) {
-  const [tokens, setTokens] = useState<any[]>([])
+  // const [tokens, setTokens] = useState<any[]>([])
   const queryAddress = address ? address.toLowerCase() : "";
   const {
     isLoading,
@@ -14,13 +14,13 @@ export function useWalletTokens(
     data
   } = useAccountQuery({ account: queryAddress })
   
-  useEffect(() => {
-    if (!data || data === null) return;
+  // useEffect(() => {
+  //   if (!data || data === null) return;
 
-    data?.account?.tokens.forEach((token) => (
-      setTokens(tokens => [...tokens, token.id])
-    ))
-  }, [address, data]);
+  //   data?.account?.tokens.forEach((token) => (
+  //     setTokens(tokens => [...tokens, token.id])
+  //   ))
+  // }, [address, data]);
 
   return useMemo(() => {
     return {
@@ -28,7 +28,7 @@ export function useWalletTokens(
       isError,
       error,
       isUninitialized,
-      tokens: tokens
+      tokens: data?.account?.tokens
     } 
-  }, [isLoading, isError, error, isUninitialized, tokens])
+  }, [isLoading, isError, error, isUninitialized, data])
 };

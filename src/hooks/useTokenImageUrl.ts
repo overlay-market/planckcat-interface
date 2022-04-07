@@ -19,27 +19,31 @@ export function useTokenImageUrl(uri: string): any {
   }, [imageUrl]);
 };
 
-export async function useTokenImageUrls(uris?: string[]){
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  console.log('made it in here 1');
-  if (!uris) return;
-  console.log('made it in here 2');
-  if (uris.length > 0) {
-    console.log('made it in here 3');
-    await uris.forEach((uri, key) => {
-        (async () => {
-          let parsed = await axios.get(uri)
-                                .then(response => (
-                                  response.data.image.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
-                                ))
-          const currentLength = imageUrls.length;
-          if (imageUrls[currentLength - 1] == parsed) return;
-          setImageUrls(imageUrls => [...imageUrls, parsed]);
-        })()
-    })
-  }
+const initialState = <string[]>[];
 
-  return imageUrls;
+export function useTokenImageUrls(uris?: string[]){
+  const [imageUrls, setImageUrls] = useState<string[]>(initialState);
+
+  console.log('uris within useTokenImageUrls: ', uris);
+  
+  useEffect(() => {
+    (async () => {
+      console.log('go through here');
+      setImageUrls(initialState);
+      uris?.forEach(async(uri: any) => {
+        await axios.get(uri)
+          .then((response: any) => {
+            console.log('response from useTokenAttributes: ', response);
+            setImageUrls(imageUrls => [...imageUrls, response]);
+          })
+      })
+    })();
+  }, [uris]);
+
+  return useMemo(() => {
+    return imageUrls ? imageUrls : null;
+  }, [imageUrls]);
+
   // const memorized = useMemo(() => {
   //   console.log('updatnig uris');
   //   return uris

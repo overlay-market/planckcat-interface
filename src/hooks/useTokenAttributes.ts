@@ -2,19 +2,24 @@ import { useMemo, useEffect, useState } from 'react';
 import axios from 'axios';
 
 export function useTokenAttributes(uri: string): any {
-  const [attributes, setAttributes] = useState([]);
+  const [tokenAttributes, setTokenAttributes] = useState([]);
+  const [tokenImageUrl, setTokenImageUrl] = useState('');
 
   useEffect(() => {
     (async () => {
       await axios.get(uri)
         .then((response: any) => {
-          console.log('response from useTokenAttributes: ', response);
-          setAttributes(response.data.attributes);
+          let replacedWithPrefix = response.data.image.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/");
+          setTokenImageUrl(replacedWithPrefix);
+          setTokenAttributes(response.data.attributes);
         })
     })();
   }, [uri]);
 
   return useMemo(() => {
-    return attributes ? attributes : null;
-  }, [attributes]);
+    return {
+      tokenAttributes,
+      tokenImageUrl
+    };
+  }, [tokenAttributes, tokenImageUrl]);
 }

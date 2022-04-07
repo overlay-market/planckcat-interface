@@ -43,6 +43,8 @@ export function useTokenUris(tokenIds: string[]): any {
   const memoized = useMemo(() => {
     let tempUris: any = [];
 
+    console.log('firing off inside useTokenUris:');
+
     tokenIds.forEach((id, key) => {
       (async () => {
         await contract.tokenURI(id)
@@ -59,7 +61,7 @@ export function useTokenUris(tokenIds: string[]): any {
     });
 
     return tempUris;
-  }, [tokenIds, contract])
+  }, [tokenIds])
   
   return memoized;
 }

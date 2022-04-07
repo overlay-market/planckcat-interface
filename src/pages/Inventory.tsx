@@ -6,6 +6,7 @@ import { useWalletTokens } from "../state/wallet/hooks";
 import { StyledInternalLink } from "../theme/components";
 import { useTokenUris } from "../hooks/useTokenURI";
 import { useTokenImageUrls } from "../hooks/useTokenImageUrl";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -34,27 +35,18 @@ const TokenCard = styled.div<{backgroundImg?: string}>`
 
 export function Inventory() {
   const [{ data: accountData }] = useAccount();
-  const { tokens } = useWalletTokens(accountData?.address);
-  const memoizedTokens = useMemo(() => (tokens), [tokens]);
-  console.log('memoizedTokens: ', memoizedTokens);
-  // const mockTokens = ['12', '6'];
-  // const uris = useTokenUris(mockTokens);
-  const uris = useTokenUris(memoizedTokens);
-  console.log('uris: ', uris);
-  const memoizedUris = useMemo(() => (uris ? uris : []), [uris]);
-  console.log('memoizeduris: ', memoizedUris);
+  const { tokens } = useWalletTokens(accountData ? accountData?.address : '');
 
-  const urls = useTokenImageUrls(memoizedUris);
+  console.log('tokens: ', tokens);
 
-  console.log('urls: ', urls);
   return (
     <Container>
       {accountData && tokens && (
         
-        tokens.map((tokenId, key) => (  
-          <StyledInternalLink to={`/token/${tokenId}`}>
-            <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`}>
-              {tokenId}
+        tokens.map((token, key) => (  
+          <StyledInternalLink to={`/token/${token.id}`}>
+            <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${token.id}.png`}>
+              {token.id}
             </TokenCard>
           </StyledInternalLink>
         ))
