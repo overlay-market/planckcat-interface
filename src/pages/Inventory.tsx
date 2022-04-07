@@ -21,8 +21,9 @@ const Container = styled.div`
 `;
 
 const TokenCard = styled.div<{ backgroundImg?: string }>`
-  height: 200px;
-  width: 200px;
+  padding: 100px;
+  max-height: 200px;
+  max-width: 200px;
   text-align: center;
   border: 1px solid white;
   color: white;
