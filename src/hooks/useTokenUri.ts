@@ -1,15 +1,15 @@
-import { useMemo, useEffect, useState, memo } from 'react';
-import { useSigner, useContract } from 'wagmi';
-import PlanckCat_ABI from '../constants/abis/PlanckCat.json';
+import { useMemo, useEffect, useState, memo } from "react";
+import { useSigner, useContract } from "wagmi";
+import PlanckCat_ABI from "../constants/abis/PlanckCat.json";
 
 export function useTokenUri(tokenId?: string | number): any {
   const [{ data: signerData }] = useSigner();
-  
+
   //default to arbitrum chain if none detected
   const contract = useContract({
-    addressOrName: '0xc9B28946144E3A0e02fcC119a622E30565916784',
+    addressOrName: "0xc9B28946144E3A0e02fcC119a622E30565916784",
     contractInterface: PlanckCat_ABI,
-    signerOrProvider: signerData
+    signerOrProvider: signerData,
   });
 
   const [uri, setUri] = useState<string | null>(null);
@@ -18,50 +18,17 @@ export function useTokenUri(tokenId?: string | number): any {
     if (!tokenId || !contract || !signerData) return;
 
     (async () => {
-      await contract.tokenURI(tokenId)
-                    .then((response: string) => {
-                      let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
-                      setUri(prepend);
-                    }) 
+      await contract.tokenURI(tokenId).then((response: string) => {
+        let prepend = response.replace(
+          "ipfs://",
+          "https://planckcat.mypinata.cloud/ipfs/"
+        );
+        setUri(prepend);
+      });
     })();
   }, [contract, tokenId, signerData]);
 
   return useMemo(() => {
     return uri ? uri : null;
-  }, [uri])
-};
-
-export function useTokenUris(tokenIds: string[]): any {
-  const [{ data: signerData }] = useSigner();
-  const contract = useContract({
-    addressOrName: '0xc9B28946144E3A0e02fcC119a622E30565916784',
-    contractInterface: PlanckCat_ABI,
-    signerOrProvider: signerData
-  });
-  const [uris, setUris] = useState<any[]>([]);
-
-  const memoized = useMemo(() => {
-    let tempUris: any = [];
-
-    console.log('firing off inside useTokenUris:');
-
-    tokenIds.forEach((id, key) => {
-      (async () => {
-        await contract.tokenURI(id)
-                    .then((response: string) => {
-                      let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
-                      
-                      // console.log('key: ', key, 'to prepend: ', prepend)
-                      // setUris(uris => [...uris, prepend]);
-                      tempUris[key] = prepend;
-                      // console.log('tempUris in .then: ', tempUris);
-                      setUris(uris => [tempUris])
-                    })
-        })();
-    });
-
-    return tempUris;
-  }, [tokenIds])
-  
-  return memoized;
+  }, [uri]);
 }

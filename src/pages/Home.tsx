@@ -18,12 +18,12 @@ const Container = styled.div`
   flex: 1;
 `;
 
-export function Home(){
+export function Home() {
   const [{ data: accountData }] = useAccount();
 
   return (
     <Container>
       <ShellTerminal />
     </Container>
-  )
+  );
 }

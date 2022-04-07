@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import { useAccount } from "wagmi";
 import { TEXT } from "../theme/theme";
 import { useWalletTokens } from "../state/wallet/hooks";
 import { StyledInternalLink } from "../theme/components";
-import { useTokenUris } from "../hooks/useTokenURI";
-import { useTokenImageUrls } from "../hooks/useTokenImageUrl";
-import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -23,39 +20,37 @@ const Container = styled.div`
   `};
 `;
 
-const TokenCard = styled.div<{backgroundImg?: string}>`
+const TokenCard = styled.div<{ backgroundImg?: string }>`
   height: 200px;
   width: 200px;
   text-align: center;
   border: 1px solid white;
   color: white;
-  background-image: url('${({backgroundImg}) => ( backgroundImg ?? backgroundImg)}');
+  background-image: url("${({ backgroundImg }) =>
+    backgroundImg ?? backgroundImg}");
   background-size: contain;
 `;
 
 export function Inventory() {
   const [{ data: accountData }] = useAccount();
-  const { tokens } = useWalletTokens(accountData ? accountData?.address : '');
-
-  console.log('tokens: ', tokens);
+  const { tokens } = useWalletTokens(accountData ? accountData?.address : "");
 
   return (
     <Container>
-      {accountData && tokens && (
-        
-        tokens.map((token, key) => (  
+      {accountData &&
+        tokens &&
+        tokens.map((token, key) => (
           <StyledInternalLink to={`/token/${token.id}`}>
-            <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${token.id}.png`}>
+            <TokenCard>
               {token.id}
             </TokenCard>
           </StyledInternalLink>
-        ))
-      )}
+        ))}
       {!tokens && (
-        <TEXT.StandardBody m={'auto'} textAlign={'center'} lineHeight={'2rem'}>
+        <TEXT.StandardBody m={"auto"} textAlign={"center"} lineHeight={"2rem"}>
           Wallet does not hold any tokens.
         </TEXT.StandardBody>
       )}
     </Container>
-  )
+  );
 }

@@ -75,10 +75,8 @@ export function Token({
       </TEXT.StandardBody>
       <TokenInfoContainer>
         {tokenImageUrl ? (
-          <TokenImage
-            backgroundImg={tokenImageUrl}
-          />
-        ):(
+          <TokenImage backgroundImg={tokenImageUrl} />
+        ) : (
           <TokenImage />
         )}
 
