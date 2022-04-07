@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components"
 import { useAccount } from "wagmi";
 import { TEXT } from "../theme/theme";
@@ -36,21 +36,22 @@ export function Inventory() {
   const [{ data: accountData }] = useAccount();
   const { tokens } = useWalletTokens(accountData?.address);
   const memoizedTokens = useMemo(() => (tokens), [tokens]);
-
-  console.log('memoizedTokens: ', memoizedTokens)
+  console.log('memoizedTokens: ', memoizedTokens);
+  // const mockTokens = ['12', '6'];
+  // const uris = useTokenUris(mockTokens);
   const uris = useTokenUris(memoizedTokens);
-  // const imageUrls = useTokenImageUrls(uris);
-
-  console.log('tokens: ', tokens);
   console.log('uris: ', uris);
+  const memoizedUris = useMemo(() => (uris ? uris : []), [uris]);
+  console.log('memoizeduris: ', memoizedUris);
 
-  // console.log('imageUrls: ', imageUrls);
+  const urls = useTokenImageUrls(memoizedUris);
 
-
+  console.log('urls: ', urls);
   return (
     <Container>
       {accountData && tokens && (
-        tokens.map((tokenId) => (  
+        
+        tokens.map((tokenId, key) => (  
           <StyledInternalLink to={`/token/${tokenId}`}>
             <TokenCard backgroundImg={`https://planckcat.mypinata.cloud/ipfs/QmRoZLDujHb5ijQ1rg17EoxWCCA7yRiEUbJ4tPwejT71Hf/${tokenId}.png`}>
               {tokenId}

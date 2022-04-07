@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useEffect, useState, memo } from 'react';
 import { useSigner, useContract } from 'wagmi';
 import PlanckCat_ABI from '../constants/abis/PlanckCat.json';
 
@@ -31,7 +31,7 @@ export function useTokenUri(tokenId?: string | number): any {
   }, [uri])
 };
 
-export function useTokenUris(tokenIds: string[]): string[] {
+export function useTokenUris(tokenIds: string[]): any {
   const [{ data: signerData }] = useSigner();
   const contract = useContract({
     addressOrName: '0xc9B28946144E3A0e02fcC119a622E30565916784',
@@ -40,17 +40,26 @@ export function useTokenUris(tokenIds: string[]): string[] {
   });
   const [uris, setUris] = useState<any[]>([]);
 
-  useMemo(() => {
+  const memoized = useMemo(() => {
+    let tempUris: any = [];
+
     tokenIds.forEach((id, key) => {
       (async () => {
         await contract.tokenURI(id)
                     .then((response: string) => {
                       let prepend = response.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
-                      setUris(uris => [prepend]);
+                      
+                      // console.log('key: ', key, 'to prepend: ', prepend)
+                      // setUris(uris => [...uris, prepend]);
+                      tempUris[key] = prepend;
+                      // console.log('tempUris in .then: ', tempUris);
+                      setUris(uris => [tempUris])
                     })
         })();
     });
+
+    return tempUris;
   }, [tokenIds, contract])
   
-  return uris;
+  return memoized;
 }
