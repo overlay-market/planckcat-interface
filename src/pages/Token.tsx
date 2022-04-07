@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { TEXT } from "../theme/theme";
 import { RouteComponentProps } from "react-router";
 import { useTokenAttributes } from "../hooks/useTokenAttributes";
-import { useTokenUri } from "../hooks/useTokenURI";
+import { useTokenUriString } from "../hooks/useTokenUriString";
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,7 +70,7 @@ export function Token({
     params: { tokenId },
   },
 }: RouteComponentProps<{ tokenId: string }>) {
-  const tokenUri = useTokenUri(tokenId);
+  const tokenUri = useTokenUriString(tokenId);
   const { tokenAttributes, tokenImageUrl } = useTokenAttributes(tokenUri);
 
   return (

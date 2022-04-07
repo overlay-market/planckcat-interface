@@ -2,7 +2,7 @@ import { useMemo, useEffect, useState, memo } from "react";
 import { useSigner, useContract } from "wagmi";
 import PlanckCat_ABI from "../constants/abis/PlanckCat.json";
 
-export function useTokenUri(tokenId?: string | number): any {
+export function useTokenUriString(tokenId?: string | number): any {
   const [{ data: signerData }] = useSigner();
 
   //default to arbitrum chain if none detected

@@ -13,7 +13,7 @@ import {
   useNetwork,
 } from "wagmi";
 import PlanckCatMinter_ABI from "../constants/abis/PlanckCatMinter.json";
-import { useTokenUri } from "../hooks/useTokenURI";
+import { useTokenUriString } from "../hooks/useTokenUriString";
 
 const Container = styled.div`
   display: flex;
