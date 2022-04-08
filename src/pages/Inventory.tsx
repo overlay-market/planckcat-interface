@@ -9,7 +9,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 500px;
+  height: 420px;
   margin: 50px auto auto auto;
   flex: 1;
   padding: 0 28px;
