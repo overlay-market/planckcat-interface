@@ -1,19 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
-import { utils } from "ethers";
 import { TEXT } from "../theme/theme";
 import { useCanClaim } from "../hooks/useCanClaim";
 import { useClaimCallback } from "../hooks/useClaimCallback";
-import {
-  useContract,
-  useSigner,
-  useAccount,
-  useContractWrite,
-  useContractRead,
-  useNetwork,
-} from "wagmi";
-import PlanckCatMinter_ABI from "../constants/abis/PlanckCatMinter.json";
-import { useTokenUriString } from "../hooks/useTokenUriString";
+import { useAccount, useNetwork } from "wagmi";
 
 const Container = styled.div`
   display: flex;
@@ -77,7 +67,6 @@ export function Claim() {
           transactionErrorMessage: undefined,
           transactionHash: response,
         });
-        console.log("handleClaim response: ", response);
       })
       .catch((error: any) => {
         setClaimState({
@@ -85,7 +74,6 @@ export function Claim() {
           transactionErrorMessage: error,
           transactionHash: undefined,
         });
-        console.error("handleClaim error: ", error);
       });
   }, [claimCallback]);
 

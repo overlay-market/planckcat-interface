@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import "./ShellTerminal.css";
-import PlanckCat from "../../assets/planck-cat.png"
+import PlanckCat from "../../assets/planck-cat.png";
 import { useAccount, useNetwork } from "wagmi";
 // @ts-nocheck
 
 const ShellWrap = styled.div`
   font: 16px Arial, sans-serif;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
   margin: 50px 12px 0;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -16,7 +16,7 @@ const ShellWrap = styled.div`
     width: 500px;
     margin: 100px auto 0 auto;
   `};
-`
+`;
 export const ShellTerminal = () => {
   const [{ data: accountData }] = useAccount();
   const [{ data: networkData }] = useNetwork();
@@ -32,16 +32,16 @@ export const ShellTerminal = () => {
         <li>- v1-core complete</li>
         <li>- smart contract audits in progress [50%]</li>
         <li>- launch imminent</li>
-        <li>{'>>'}</li>
-        <li>{'>>'}</li>
-        <li>{'>>'}</li>
+        <li>{">>"}</li>
+        <li>{">>"}</li>
+        <li>{">>"}</li>
 
-        { accountData && networkData ? (
+        {accountData && networkData ? (
           <>
             <li>Welcome user {accountData.address} </li>
             <li>Connected Network: {networkData?.chain?.name}</li>
           </>
-        ):(
+        ) : (
           <li>Welcome Anonymous User! Please connect wallet.</li>
         )}
       </ul>

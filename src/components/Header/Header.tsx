@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { TEXT } from "../../theme/theme";
 import { NavLink, useLocation } from "react-router-dom";
 import { StyledInternalLink } from "../../theme/components";
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet";
@@ -25,7 +24,7 @@ const FlexRowContainer = styled.div`
   ${({ theme }) => theme.mediaWidth.minSmall`
     padding: 48px;
   `};
-`
+`;
 
 const DesktopNavigationContainer = styled.div`
   display: none;
@@ -38,13 +37,13 @@ const DesktopNavigationContainer = styled.div`
 const NavigationLink = styled(StyledInternalLink)`
   margin-top: auto;
   margin-bottom: auto;
-`
+`;
 
 const MenuLink = styled(NavigationLink)`
   font-size: 12px;
-`
+`;
 
-const activeClassName = 'ACTIVE';
+const activeClassName = "ACTIVE";
 
 const StyledNavLink = styled(NavLink).attrs({
   activeClassName,
@@ -74,37 +73,33 @@ export const Header = () => {
   const location = useLocation().pathname;
   const menuId = "main-menu";
 
-    // close menu when at new route
-    useEffect(() => {
-      if (open) {
-        setOpen((open) => false)
-      };
-    }, [location])
-  
-    // disable scroll when mobile menu open
-    useEffect(() => {
-      if (open) {
-        enableLock();
-      } else {
-        disableLock();
-      }
-    }, [open]);
+  // close menu when at new route
+  useEffect(() => {
+    if (open) {
+      setOpen((open) => false);
+    }
+  }, [location]);
+
+  // disable scroll when mobile menu open
+  useEffect(() => {
+    if (open) {
+      enableLock();
+    } else {
+      disableLock();
+    }
+  }, [open]);
 
   return (
     <HeaderContainer>
       <FlexRowContainer>
-        <NavigationLink to={'/'} noEffect={true}>
+        <NavigationLink to={"/"} noEffect={true}>
           PlanckCatDAO
         </NavigationLink>
 
         <DesktopNavigationContainer>
-          <StyledNavLink to={'/Claim'}>
-            Claim
-          </StyledNavLink>
+          <StyledNavLink to={"/Claim"}>Claim</StyledNavLink>
 
-          <StyledNavLink to={'/Inventory'}>
-            Inventory
-          </StyledNavLink>
+          <StyledNavLink to={"/Inventory"}>Inventory</StyledNavLink>
           <ConnectWallet />
         </DesktopNavigationContainer>
 
@@ -113,5 +108,5 @@ export const Header = () => {
       </FlexRowContainer>
       <ConnectWalletModal />
     </HeaderContainer>
-  )
+  );
 };

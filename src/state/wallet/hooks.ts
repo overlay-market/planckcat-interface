@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useAccountQuery } from "../data/enhanced";
 
 export function useWalletTokens(address: string | null | undefined) {

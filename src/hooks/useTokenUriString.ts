@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState, memo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useSigner, useContract } from "wagmi";
 import PlanckCat_ABI from "../constants/abis/PlanckCat.json";
 

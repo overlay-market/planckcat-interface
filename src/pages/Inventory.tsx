@@ -1,4 +1,3 @@
-import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useAccount } from "wagmi";
 import { TEXT } from "../theme/theme";
@@ -42,9 +41,7 @@ export function Inventory() {
         tokens &&
         tokens.map((token, key) => (
           <StyledInternalLink to={`/token/${token.id}`}>
-            <TokenCard>
-              {token.id}
-            </TokenCard>
+            <TokenCard>{token.id}</TokenCard>
           </StyledInternalLink>
         ))}
       {!tokens && (
