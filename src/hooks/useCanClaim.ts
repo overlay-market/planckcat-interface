@@ -8,7 +8,6 @@ export function useCanClaim(accountAddress?: string): any {
     { data: signerData, error: signerError, loading: signerLoading },
     getSigner,
   ] = useSigner();
-  const [{ data: connectData, error, loading }, connect] = useConnect();
   const [{ data: networkData }, switchNetwork] = useNetwork();
 
   const chainId: number | null = networkData?.chain?.id
@@ -28,11 +27,16 @@ export function useCanClaim(accountAddress?: string): any {
     if (accountAddress === "" || !contract || !signerData) return;
 
     (async () => {
-      await contract.canClaim(accountAddress).then((response: any) => {
-        let temp: any = [];
-        response.map((token: any) => temp.push(token.toNumber()));
-        setClaimable(temp);
-      });
+      await contract
+        .canClaim(accountAddress)
+        .then((response: any) => {
+          let temp: any = [];
+          response.map((token: any) => temp.push(token.toNumber()));
+          setClaimable(temp);
+        })
+        .catch((error: any) => {
+          console.error("error: ", error);
+        });
     })();
   }, [contract, accountAddress, signerData]);
 

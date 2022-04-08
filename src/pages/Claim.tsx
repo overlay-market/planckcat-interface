@@ -93,7 +93,7 @@ export function Claim() {
     <Container>
       {claimable == null && (
         <TEXT.StandardBody m={"auto"} textAlign={"center"} lineHeight={"2rem"}>
-          Checking for claimable tokens...
+          You have no claimable tokens currently.
         </TEXT.StandardBody>
       )}
       {claimable && claimable.length === 0 && (
