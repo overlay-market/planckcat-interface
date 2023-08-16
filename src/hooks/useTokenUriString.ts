@@ -21,7 +21,7 @@ export function useTokenUriString(tokenId?: string | number): any {
       await contract.tokenURI(tokenId).then((response: string) => {
         let prepend = response.replace(
           "ipfs://",
-          "https://planckcat.mypinata.cloud/ipfs/"
+          "https://gateway.pinata.cloud/ipfs/"
         );
         setUri(prepend);
       });
