@@ -8,7 +8,7 @@ export function useTokenImageUrl(uri: string): any {
     (async () => {
       await axios.get(uri)
         .then((response: any) => {
-          const fetchedUrl = response.data.image.replace("ipfs://", "https://planckcat.mypinata.cloud/ipfs/")
+          const fetchedUrl = response.data.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
           setImageUrl(fetchedUrl)
         })
     })();
