@@ -10,7 +10,7 @@ export function useTokenAttributes(uri: string): any {
       await axios.get(uri).then((response: any) => {
         let replacedWithPrefix = response.data.image.replace(
           "ipfs://",
-          "https://planckcat.mypinata.cloud/ipfs/"
+          "https://gateway.pinata.cloud/ipfs/"
         );
         setTokenImageUrl(replacedWithPrefix);
         setTokenAttributes(response.data.attributes);
